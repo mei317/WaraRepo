@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理ダッシュボード - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menu Toggle Button (PC) -->
+    <button class="menu-toggle" onclick="toggleSideNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="side-nav" id="sideNav">
+      <div class="side-nav-header">
+        <h2>ｗｗｗレポ</h2>
+        <p>お笑いライブアンケート</p>
+      </div>
+      <div class="side-nav-menu">
+        <a href="index.html" class="side-nav-item">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a href="account.html" class="side-nav-item">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">管理者メニュー</div>
+          <a href="live-detail.html" class="side-nav-item">
+            <span class="material-icons">event</span>
+            ライブ管理
+          </a>
+        </div>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">観客メニュー</div>
+          <a href="create-survey.html" class="side-nav-item">
+            <span class="material-icons">add_circle</span>
+            アンケート作成
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleSideNav()"></div>
+
+    <div class="app">
+      <div class="container main-content" id="mainContent">
+        <div class="admin-placeholder">
+          <div class="placeholder-content">
+            <h2>管理機能</h2>
+            <p>将来の管理機能がここに表示されます</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新規ライブ作成モーダル -->
+    <div class="modal" id="createLiveModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>新しいライブを作成</h2>
+          <button class="close-btn" onclick="closeModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <form id="createLiveForm">
+          <div class="form-group">
+            <label>ライブ名</label>
+            <input type="text" id="liveName" placeholder="例：第10回お笑いライブ" required />
+          </div>
+          <div class="form-group">
+            <label>開催日時</label>
+            <input type="datetime-local" id="liveDate" required />
+          </div>
+          <div class="form-group">
+            <label>会場名</label>
+            <input type="text" id="venue" placeholder="例：〇〇ホール" />
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal()">キャンセル</button>
+            <button type="submit" class="btn-primary">作成</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Global Bottom Navigation (Mobile) -->
+    <nav class="global-nav">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+      <a href="live-detail.html" class="nav-item">
+        <span class="material-icons">dashboard</span>
+        <span>管理</span>
+      </a>
+      <a href="create-survey.html" class="nav-item">
+        <span class="material-icons">add_circle</span>
+        <span>作成</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <span class="material-icons">account_circle</span>
+        <span>アカウント</span>
+      </a>
+    </nav>
+
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ライブ詳細管理 - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menu Toggle Button (PC) -->
+    <button class="menu-toggle" onclick="toggleSideNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="side-nav" id="sideNav">
+      <div class="side-nav-header">
+        <h2>ｗｗｗレポ</h2>
+        <p>お笑いライブアンケート</p>
+      </div>
+      <div class="side-nav-menu">
+        <a href="index.html" class="side-nav-item">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a href="account.html" class="side-nav-item">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">管理者メニュー</div>
+          <a href="live-detail.html" class="side-nav-item active">
+            <span class="material-icons">event</span>
+            ライブ管理
+          </a>
+        </div>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">観客メニュー</div>
+          <a href="create-survey.html" class="side-nav-item">
+            <span class="material-icons">add_circle</span>
+            アンケート作成
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleSideNav()"></div>
+
+    <div class="app">
+      <div class="container main-content" id="mainContent">
+        <div class="header">
+          <h1>ライブ管理</h1>
+          <button class="settings-btn">
+            <span class="material-icons">settings</span>
+          </button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" onclick="showTab('performers')">芸人管理</button>
+          <button class="tab" onclick="showTab('results')">集計結果</button>
+        </div>
+
+        <!-- 芸人管理タブ -->
+        <div class="tab-content active" id="performersTab">
+          <div class="add-performer-section">
+            <button class="btn-primary" onclick="showAddPerformerModal()"><span class="material-icons">add</span> 芸人を追加</button>
+          </div>
+
+          <div class="performers-list" id="performersList">
+            <div class="performer-card current">
+              <div class="performer-info">
+                <div class="performer-order">1</div>
+                <div class="performer-details">
+                  <h3>サンプル芸人A</h3>
+                  <p>コント・漫才</p>
+                </div>
+                <div class="performer-status">
+                  <div class="status-badge current">評価中</div>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small" onclick="editPerformer('1')">編集</button>
+                <button class="btn-small danger" onclick="removePerformer('1')">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">2</div>
+                <div class="performer-details">
+                  <h3>サンプル芸人B</h3>
+                  <p>漫才</p>
+                </div>
+                <div class="performer-status">
+                  <div class="status-badge waiting">待機中</div>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small" onclick="editPerformer('2')">編集</button>
+                <button class="btn-small danger" onclick="removePerformer('2')">削除</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <h3>進行管理</h3>
+            <div class="control-buttons">
+              <button class="btn-secondary-purple" onclick="previousPerformer()"><span class="material-icons">skip_previous</span> 前の芸人</button>
+              <button class="btn-skyblue" onclick="nextPerformer()">次の芸人 <span class="material-icons">skip_next</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 集計結果タブ -->
+        <div class="tab-content" id="resultsTab">
+          <div class="stats-overview">
+            <div class="stat-card">
+              <div class="stat-number">23</div>
+              <div class="stat-label">総回答数</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">5</div>
+              <div class="stat-label">参加芸人数</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">4.2</div>
+              <div class="stat-label">平均評価</div>
+            </div>
+          </div>
+
+          <div class="results-list">
+            <div class="result-card">
+              <div class="result-header">
+                <h3>サンプル芸人A</h3>
+                <div class="rating"><span class="material-icons">star</span> 4.5</div>
+              </div>
+              <div class="result-details">
+                <p>回答数: 12件</p>
+                <div class="rating-breakdown">
+                  <span>⭐⭐⭐⭐⭐ (8)</span>
+                  <span>⭐⭐⭐⭐ (3)</span>
+                  <span>⭐⭐⭐ (1)</span>
+                </div>
+              </div>
+              <button class="btn-green btn-small" onclick="showComments('1')">コメントを見る</button>
+            </div>
+
+            <div class="result-card">
+              <div class="result-header">
+                <h3>サンプル芸人B</h3>
+                <div class="rating"><span class="material-icons">star</span> 3.8</div>
+              </div>
+              <div class="result-details">
+                <p>回答数: 11件</p>
+                <div class="rating-breakdown">
+                  <span>⭐⭐⭐⭐⭐ (5)</span>
+                  <span>⭐⭐⭐⭐ (4)</span>
+                  <span>⭐⭐⭐ (2)</span>
+                </div>
+              </div>
+              <button class="btn-green btn-small" onclick="showComments('2')">コメントを見る</button>
+            </div>
+          </div>
+
+          <div class="export-section">
+            <h3>データエクスポート</h3>
+            <div class="export-buttons">
+              <button class="btn-secondary-purple" onclick="exportCSV()">CSV形式</button>
+              <button class="btn-secondary" onclick="exportPDF()">PDF形式</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 芸人追加モーダル -->
+    <div class="modal" id="addPerformerModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>芸人を追加</h2>
+          <button class="close-btn" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="addPerformerForm">
+          <div class="form-group">
+            <label>芸人名・コンビ名</label>
+            <input type="text" id="performerName" placeholder="例：お笑いコンビ名" required />
+          </div>
+          <div class="form-group">
+            <label>ネタのジャンル</label>
+            <select id="performerGenre">
+              <option value="コント">コント</option>
+              <option value="漫才">漫才</option>
+              <option value="ピン芸">ピン芸</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal()">キャンセル</button>
+            <button type="submit" class="btn-primary">追加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Global Bottom Navigation (Mobile) -->
+    <nav class="global-nav">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+      <a href="live-detail.html" class="nav-item active">
+        <span class="material-icons">dashboard</span>
+        <span>管理</span>
+      </a>
+      <a href="create-survey.html" class="nav-item">
+        <span class="material-icons">add_circle</span>
+        <span>作成</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <span class="material-icons">account_circle</span>
+        <span>アカウント</span>
+      </a>
+    </nav>
+
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+  </body>
+</html>

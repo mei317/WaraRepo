@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>アンケート作成 - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menu Toggle Button (PC) -->
+    <button class="menu-toggle" onclick="toggleSideNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="side-nav" id="sideNav">
+      <div class="side-nav-header">
+        <h2>ｗｗｗレポ</h2>
+        <p>お笑いライブアンケート</p>
+      </div>
+      <div class="side-nav-menu">
+        <a href="index.html" class="side-nav-item">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a href="account.html" class="side-nav-item">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">管理者メニュー</div>
+          <a href="live-detail.html" class="side-nav-item">
+            <span class="material-icons">event</span>
+            ライブ管理
+          </a>
+        </div>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">観客メニュー</div>
+          <a href="create-survey.html" class="side-nav-item active">
+            <span class="material-icons">add_circle</span>
+            アンケート作成
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleSideNav()"></div>
+
+    <div class="app">
+      <div class="container main-content" id="mainContent">
+        <div class="logo-header">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <div class="header reset-flex">
+          <h1>新しいアンケートを作成</h1>
+          <p>ライブの芸人さんを評価するアンケートを作成できます。</p>
+        </div>
+
+        <div class="live-info-card">
+          <h3>テンプレートを使用</h3>
+          <p>過去に保存したテンプレートから選択するか、新規で作成してください。</p>
+          <button class="btn-secondary-purple full-width" onclick="openTemplateModal()">
+            <span class="material-icons">folder_open</span>
+            テンプレートを選択
+          </button>
+          <div id="currentTemplate" style="display: none; margin-top: 1rem">
+            <div class="template-current">
+              <h4>選択中のテンプレート</h4>
+              <div class="template-info">
+                <strong id="currentTemplateName">新規作成</strong>
+                <p id="currentTemplateDesc">新しいアンケートを作成します</p>
+                <button class="btn-secondary btn-small" onclick="clearTemplate()" style="margin-top: 0.5rem">
+                  <span class="material-icons">clear</span>
+                  テンプレートをクリア
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="live-info-card">
+          <h3>基本情報</h3>
+          <div class="form-group">
+            <label for="surveyTitle">アンケートタイトル</label>
+            <input type="text" id="surveyTitle" placeholder="例：○○ライブアンケート" required />
+          </div>
+          <div class="form-group">
+            <label for="liveName">ライブ名</label>
+            <input type="text" id="liveName" placeholder="例：春のお笑いライブ" required />
+          </div>
+          <div class="form-group">
+            <label for="liveDate">開催日時</label>
+            <input type="datetime-local" id="liveDate" required />
+          </div>
+          <div class="form-group">
+            <label for="description">説明</label>
+            <textarea id="description" placeholder="アンケートの説明や注意事項を入力してください"></textarea>
+          </div>
+        </div>
+
+        <div class="live-info-card">
+          <h3>評価項目設定</h3>
+          <div class="form-group">
+            <label>評価方法</label>
+            <select id="ratingType">
+              <option value="star">星評価（1-5段階）</option>
+              <option value="number">数値評価（1-10段階）</option>
+              <option value="emoji">顔文字評価</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="allowComments" checked />
+              コメント欄を有効にする
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="commentLimit">コメント文字数制限</label>
+            <select id="commentLimit">
+              <option value="100">100文字</option>
+              <option value="200" selected>200文字</option>
+              <option value="500">500文字</option>
+              <option value="unlimited">制限なし</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="live-info-card">
+          <h3>公開設定</h3>
+          <div class="form-group">
+            <label>
+              <input type="radio" name="visibility" value="public" checked />
+              パブリック（QRコードで一般公開）
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="radio" name="visibility" value="private" />
+              プライベート（招待制）
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="allowAnonymous" checked />
+              匿名での回答を許可する
+            </label>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-secondary full-width" onclick="saveAsTemplate()">
+            <span class="material-icons">bookmark</span>
+            テンプレートとして保存
+          </button>
+          <button class="btn-secondary full-width" onclick="saveDraft()">
+            <span class="material-icons">save</span>
+            下書き保存
+          </button>
+          <button class="btn-primary full-width" onclick="createSurvey()">
+            <span class="material-icons">publish</span>
+            アンケートを作成
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Survey Created Success View -->
+    <div class="app">
+      <div class="container survey-success-view" id="surveySuccessView" style="display: none">
+        <div class="logo-header">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <div class="success-header">
+          <div class="success-icon">
+            <span class="material-icons">check_circle</span>
+          </div>
+          <h2>アンケートが作成されました！</h2>
+          <p>観客の皆様にアンケートURLを共有してください。</p>
+        </div>
+
+        <div class="share-section">
+          <div class="live-info-card">
+            <h3>アンケートURL</h3>
+            <div class="url-display">
+              <input type="text" id="surveyUrl" value="https://wararepo.com/survey/abc123" readonly />
+              <button class="btn-secondary-purple btn-small" onclick="copyUrl()">
+                <span class="material-icons">content_copy</span>
+                コピー
+              </button>
+            </div>
+            <p class="url-note">この URLを観客の皆様に共有してください。</p>
+          </div>
+
+          <div class="live-info-card">
+            <h3>QRコード</h3>
+            <div class="qr-section">
+              <div class="qr-code" id="qrCode">
+                <div class="qr-placeholder">
+                  <span class="material-icons">qr_code</span>
+                  <p>QRコード</p>
+                </div>
+              </div>
+              <p>スマートフォンで簡単にアクセスできます</p>
+              <button class="btn-secondary" onclick="downloadQR()">
+                <span class="material-icons">download</span>
+                QRコードをダウンロード
+              </button>
+            </div>
+          </div>
+
+          <div class="live-info-card">
+            <h3>管理情報</h3>
+            <div class="management-info">
+              <div class="info-row">
+                <span class="info-label">アンケートID:</span>
+                <span class="info-value" id="surveyId">ABC123</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">作成日時:</span>
+                <span class="info-value" id="createdDate">2024年3月15日 10:30</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">ステータス:</span>
+                <span class="status-badge active">公開中</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">回答数:</span>
+                <span class="info-value">0件</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-secondary full-width" onclick="goToLiveManagement()">
+            <span class="material-icons">dashboard</span>
+            ライブ管理画面へ
+          </button>
+          <button class="btn-primary full-width" onclick="createAnotherSurvey()">
+            <span class="material-icons">add</span>
+            別のアンケートを作成
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Bottom Navigation (Mobile) -->
+    <nav class="global-nav">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+      <a href="live-detail.html" class="nav-item">
+        <span class="material-icons">dashboard</span>
+        <span>管理</span>
+      </a>
+      <a href="create-survey.html" class="nav-item active">
+        <span class="material-icons">add_circle</span>
+        <span>作成</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <span class="material-icons">account_circle</span>
+        <span>アカウント</span>
+      </a>
+    </nav>
+
+    <!-- Template Selection Modal -->
+    <div class="modal" id="templateModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>テンプレートを選択</h2>
+          <button class="close-btn" onclick="closeTemplateModal()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>プリセットテンプレート</h3>
+          <div class="template-grid">
+            <div class="template-card" data-template="template1">
+              <div class="template-card-header">
+                <h4>標準ライブアンケート</h4>
+                <span class="template-type">プリセット</span>
+              </div>
+              <p>各芸人さんのパフォーマンスを評価してください。</p>
+              <div class="template-settings">
+                <span class="template-tag">星評価</span>
+                <span class="template-tag">コメント有効</span>
+                <span class="template-tag">パブリック</span>
+              </div>
+              <button class="btn-secondary-purple btn-small" onclick="selectTemplate('template1')">
+                <span class="material-icons">check</span>
+                選択
+              </button>
+            </div>
+
+            <div class="template-card" data-template="template2">
+              <div class="template-card-header">
+                <h4>コンテスト形式</h4>
+                <span class="template-type">プリセット</span>
+              </div>
+              <p>優勝者を決めるための評価をお願いします。厳正な審査をお願いします。</p>
+              <div class="template-settings">
+                <span class="template-tag">数値評価</span>
+                <span class="template-tag">コメント有効</span>
+                <span class="template-tag">パブリック</span>
+              </div>
+              <button class="btn-secondary-purple btn-small" onclick="selectTemplate('template2')">
+                <span class="material-icons">check</span>
+                選択
+              </button>
+            </div>
+
+            <div class="template-card" data-template="template3">
+              <div class="template-card-header">
+                <h4>フィードバック重視</h4>
+                <span class="template-type">プリセット</span>
+              </div>
+              <p>建設的なフィードバックをお願いします。</p>
+              <div class="template-settings">
+                <span class="template-tag">星評価</span>
+                <span class="template-tag">コメント無制限</span>
+                <span class="template-tag">プライベート</span>
+              </div>
+              <button class="btn-secondary-purple btn-small" onclick="selectTemplate('template3')">
+                <span class="material-icons">check</span>
+                選択
+              </button>
+            </div>
+          </div>
+
+          <h3>保存済みテンプレート</h3>
+          <div class="template-grid">
+            <div class="template-card" data-template="custom1">
+              <div class="template-card-header">
+                <h4>春のお笑いライブ</h4>
+                <span class="template-type">カスタム</span>
+              </div>
+              <p>桜咲く季節のお笑いライブをお楽しみいただき、ありがとうございました。</p>
+              <div class="template-settings">
+                <span class="template-tag">星評価</span>
+                <span class="template-tag">コメント有効</span>
+                <span class="template-tag">パブリック</span>
+              </div>
+              <div class="template-actions">
+                <button class="btn-secondary-purple btn-small" onclick="selectTemplate('custom1')">
+                  <span class="material-icons">check</span>
+                  選択
+                </button>
+                <button class="btn-small danger" onclick="deleteTemplate('custom1')">
+                  <span class="material-icons">delete</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card" data-template="custom2">
+              <div class="template-card-header">
+                <h4>新人コンテスト</h4>
+                <span class="template-type">カスタム</span>
+              </div>
+              <p>未来のスターを応援してください！</p>
+              <div class="template-settings">
+                <span class="template-tag">顔文字評価</span>
+                <span class="template-tag">コメント有効</span>
+                <span class="template-tag">パブリック</span>
+              </div>
+              <div class="template-actions">
+                <button class="btn-secondary-purple btn-small" onclick="selectTemplate('custom2')">
+                  <span class="material-icons">check</span>
+                  選択
+                </button>
+                <button class="btn-small danger" onclick="deleteTemplate('custom2')">
+                  <span class="material-icons">delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 2rem">
+            <button class="btn-secondary" onclick="closeTemplateModal()">
+              <span class="material-icons">close</span>
+              キャンセル
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="navigation.js"></script>
+    <script>
+      // Header scroll functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        let lastScrollTop = 0;
+        let isScrolling = false;
+        const header = document.querySelector(".logo-header");
+        const scrollThreshold = 5;
+
+        if (!header) {
+          console.error("Header element not found");
+          return;
+        }
+
+        function handleScroll() {
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          let scrollDifference = Math.abs(scrollTop - lastScrollTop);
+
+          if (scrollDifference < scrollThreshold) {
+            return;
+          }
+
+          if (scrollTop > 100) {
+            if (scrollTop < lastScrollTop - scrollThreshold) {
+              header.classList.add("show");
+            } else if (scrollTop > lastScrollTop + scrollThreshold) {
+              header.classList.remove("show");
+            }
+          } else {
+            header.classList.remove("show");
+          }
+
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+
+        function throttle(func, wait) {
+          let timeout;
+          return function executedFunction(...args) {
+            const later = () => {
+              clearTimeout(timeout);
+              func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+          };
+        }
+
+        window.addEventListener("scroll", throttle(handleScroll, 100), { passive: true });
+      });
+
+      // テンプレートデータ
+      const templates = {
+        template1: {
+          title: "標準ライブアンケート",
+          liveName: "お笑いライブ",
+          description: "各芸人さんのパフォーマンスを評価してください。",
+          ratingType: "star",
+          allowComments: true,
+          commentLimit: "200",
+          visibility: "public",
+          allowAnonymous: true,
+        },
+        template2: {
+          title: "コンテスト形式アンケート",
+          liveName: "お笑いコンテスト",
+          description: "優勝者を決めるための評価をお願いします。厳正な審査をお願いします。",
+          ratingType: "number",
+          allowComments: true,
+          commentLimit: "500",
+          visibility: "public",
+          allowAnonymous: false,
+        },
+        template3: {
+          title: "フィードバック重視アンケート",
+          liveName: "練習会",
+          description: "建設的なフィードバックをお願いします。",
+          ratingType: "star",
+          allowComments: true,
+          commentLimit: "unlimited",
+          visibility: "private",
+          allowAnonymous: true,
+        },
+        custom1: {
+          title: "春のお笑いライブアンケート",
+          liveName: "春のお笑いライブ2024",
+          description: "桜咲く季節のお笑いライブをお楽しみいただき、ありがとうございました。",
+          ratingType: "star",
+          allowComments: true,
+          commentLimit: "200",
+          visibility: "public",
+          allowAnonymous: true,
+        },
+        custom2: {
+          title: "新人コンテストアンケート",
+          liveName: "新人お笑いコンテスト",
+          description: "未来のスターを応援してください！",
+          ratingType: "emoji",
+          allowComments: true,
+          commentLimit: "100",
+          visibility: "public",
+          allowAnonymous: true,
+        },
+      };
+
+      let selectedTemplateId = null;
+
+      function openTemplateModal() {
+        document.getElementById("templateModal").classList.add("show");
+      }
+
+      function closeTemplateModal() {
+        document.getElementById("templateModal").classList.remove("show");
+      }
+
+      function selectTemplate(templateId) {
+        selectedTemplateId = templateId;
+        const template = templates[templateId];
+
+        if (template) {
+          // フォームに値を設定
+          document.getElementById("surveyTitle").value = template.title;
+          document.getElementById("liveName").value = template.liveName;
+          document.getElementById("description").value = template.description;
+          document.getElementById("ratingType").value = template.ratingType;
+          document.getElementById("allowComments").checked = template.allowComments;
+          document.getElementById("commentLimit").value = template.commentLimit;
+          document.querySelector(`input[name="visibility"][value="${template.visibility}"]`).checked = true;
+          document.getElementById("allowAnonymous").checked = template.allowAnonymous;
+
+          // 現在のテンプレート表示を更新
+          document.getElementById("currentTemplateName").textContent = template.title;
+          document.getElementById("currentTemplateDesc").textContent = template.description;
+          document.getElementById("currentTemplate").style.display = "block";
+
+          closeTemplateModal();
+          alert("テンプレートが適用されました！");
+        }
+      }
+
+      function clearTemplate() {
+        selectedTemplateId = null;
+        clearForm();
+        document.getElementById("currentTemplate").style.display = "none";
+      }
+
+      function deleteTemplate(templateId) {
+        if (confirm("このテンプレートを削除しますか？")) {
+          // 実際の実装ではサーバーから削除
+          alert(`テンプレート「${templates[templateId].title}」を削除しました`);
+          // カードを非表示にする
+          document.querySelector(`[data-template="${templateId}"]`).style.display = "none";
+        }
+      }
+
+      function clearForm() {
+        document.getElementById("surveyTitle").value = "";
+        document.getElementById("liveName").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("ratingType").value = "star";
+        document.getElementById("allowComments").checked = true;
+        document.getElementById("commentLimit").value = "200";
+        document.querySelector('input[name="visibility"][value="public"]').checked = true;
+        document.getElementById("allowAnonymous").checked = true;
+      }
+
+      function saveAsTemplate() {
+        const title = document.getElementById("surveyTitle").value;
+        if (!title) {
+          alert("テンプレート名（アンケートタイトル）を入力してください。");
+          return;
+        }
+
+        const templateData = {
+          title: title,
+          liveName: document.getElementById("liveName").value,
+          description: document.getElementById("description").value,
+          ratingType: document.getElementById("ratingType").value,
+          allowComments: document.getElementById("allowComments").checked,
+          commentLimit: document.getElementById("commentLimit").value,
+          visibility: document.querySelector('input[name="visibility"]:checked').value,
+          allowAnonymous: document.getElementById("allowAnonymous").checked,
+        };
+
+        // 実際の実装ではローカルストレージやサーバーに保存
+        console.log("保存するテンプレートデータ:", templateData);
+        alert(`「${title}」をテンプレートとして保存しました！\n次回作成時に選択できます。`);
+      }
+
+      function saveDraft() {
+        alert("下書きを保存しました");
+      }
+
+      function createSurvey() {
+        const title = document.getElementById("surveyTitle").value;
+        const liveName = document.getElementById("liveName").value;
+
+        if (!title || !liveName) {
+          alert("アンケートタイトルとライブ名を入力してください。");
+          return;
+        }
+
+        // 作成処理をシミュレート
+        showSurveyCreated(title, liveName);
+      }
+
+      function showSurveyCreated(title, liveName) {
+        // フォーム画面を非表示
+        const mainContent = document.getElementById("mainContent");
+        mainContent.style.display = "none";
+
+        // 成功画面を表示
+        const successView = document.getElementById("surveySuccessView");
+        successView.style.display = "block";
+
+        // データを更新
+        const surveyId = generateSurveyId();
+        const surveyUrl = `https://wararepo.com/survey/${surveyId.toLowerCase()}`;
+
+        document.getElementById("surveyUrl").value = surveyUrl;
+        document.getElementById("surveyId").textContent = surveyId;
+        document.getElementById("createdDate").textContent = new Date().toLocaleString("ja-JP");
+
+        // QRコードを生成（実際の実装ではQRライブラリを使用）
+        generateQRCode(surveyUrl);
+
+        console.log("Survey created successfully:", { title, liveName, surveyId, surveyUrl });
+      }
+
+      function generateSurveyId() {
+        return "SRV" + Math.random().toString(36).substr(2, 6).toUpperCase();
+      }
+
+      function generateQRCode(url) {
+        // 実際の実装ではqrcode.jsなどのライブラリを使用
+        // ここではプレースホルダー表示
+        const qrElement = document.getElementById("qrCode");
+        qrElement.innerHTML = `
+                <div class="qr-placeholder">
+                    <span class="material-icons">qr_code_2</span>
+                    <p>QRコード生成済み</p>
+                    <small>${url}</small>
+                </div>
+            `;
+      }
+
+      function copyUrl() {
+        const urlInput = document.getElementById("surveyUrl");
+        urlInput.select();
+        urlInput.setSelectionRange(0, 99999);
+
+        navigator.clipboard
+          .writeText(urlInput.value)
+          .then(() => {
+            // 一時的にボタンテキストを変更
+            const btn = event.target.closest("button");
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-icons">check</span>コピー済み';
+            btn.style.background = "#28a745";
+            btn.style.color = "white";
+
+            setTimeout(() => {
+              btn.innerHTML = originalText;
+              btn.style.background = "";
+              btn.style.color = "";
+            }, 2000);
+          })
+          .catch(() => {
+            alert("URLをコピーしました: " + urlInput.value);
+          });
+      }
+
+      function downloadQR() {
+        // 実際の実装ではQRコード画像をダウンロード
+        alert("QRコードをダウンロードします（実装予定）");
+      }
+
+      function goToLiveManagement() {
+        window.location.href = "live-detail.html";
+      }
+
+      function createAnotherSurvey() {
+        // 成功画面を非表示
+        document.getElementById("surveySuccessView").style.display = "none";
+
+        // フォーム画面を表示
+        document.getElementById("mainContent").style.display = "block";
+
+        // フォームをクリア
+        clearForm();
+        clearTemplate();
+      }
+    </script>
+  </body>
+</html>

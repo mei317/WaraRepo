@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <div class="header">
+                <button class="back-btn" onclick="history.back()">
+                    <span class="material-icons">arrow_back</span>
+                </button>
+                <h1>ログイン</h1>
+            </div>
+            
+            <div class="login-form">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="メールアドレス" required>
+                    <div class="input-icon">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="パスワード" required>
+                    <div class="input-icon">
+                        <span class="material-icons">visibility</span>
+                    </div>
+                </div>
+                
+                <button class="btn-primary full-width" onclick="handleLogin()">
+                    ログイン
+                </button>
+                
+                <div class="divider">
+                    <span>または</span>
+                </div>
+                
+                <button class="btn-social google" onclick="loginWithGoogle()">
+                    <span class="material-icons">login</span><span class="english-text">Google</span>でログイン
+                </button>
+                
+                <button class="btn-social facebook" onclick="loginWithFacebook()">
+                    <span class="material-icons">login</span><span class="english-text">Facebook</span>でログイン
+                </button>
+            </div>
+            
+            <div class="signup-link">
+                <p>アカウントをお持ちでない方は</p>
+                <button class="btn-link" onclick="showSignup()">新規登録</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

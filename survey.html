@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>アンケート - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Menu Toggle Button (PC) -->
+    <button class="menu-toggle" onclick="toggleSideNav()">
+      <span class="material-icons">menu</span>
+    </button>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="side-nav" id="sideNav">
+      <div class="side-nav-header">
+        <h2>ｗｗｗレポ</h2>
+        <p>お笑いライブアンケート</p>
+      </div>
+      <div class="side-nav-menu">
+        <a href="index.html" class="side-nav-item">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a href="account.html" class="side-nav-item">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">管理者メニュー</div>
+          <a href="live-detail.html" class="side-nav-item">
+            <span class="material-icons">event</span>
+            ライブ管理
+          </a>
+        </div>
+        <div class="side-nav-section">
+          <div class="side-nav-section-title">観客メニュー</div>
+          <a href="create-survey.html" class="side-nav-item">
+            <span class="material-icons">add_circle</span>
+            アンケート作成
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleSideNav()"></div>
+
+    <div class="app">
+      <div class="container main-content" id="mainContent">
+        <div class="logo-header">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <div class="header">
+          <h1 id="surveyTitle">サンプルライブアンケート</h1>
+        </div>
+
+        <div class="live-info-card">
+          <h2 id="surveyLiveName">サンプルライブ</h2>
+          <p>📅 2024年3月15日 19:00開演</p>
+          <p>ご参加ありがとうございます！各芸人さんの評価とコメントをお聞かせください。</p>
+        </div>
+
+        <div class="current-performer-info" id="currentPerformerInfo">
+          <div class="performer-badge">現在評価中</div>
+          <h3>サンプル芸人A</h3>
+          <p>コント・漫才</p>
+        </div>
+
+        <div class="survey-form" id="surveyForm">
+          <div class="rating-section">
+            <h3>この芸人さんの評価をお聞かせください</h3>
+            <div class="star-rating" id="starRating">
+              <button class="star" data-rating="1">⭐</button>
+              <button class="star" data-rating="2">⭐</button>
+              <button class="star" data-rating="3">⭐</button>
+              <button class="star" data-rating="4">⭐</button>
+              <button class="star" data-rating="5">⭐</button>
+            </div>
+            <p class="rating-text" id="ratingText">評価を選択してください</p>
+          </div>
+
+          <div class="comment-section">
+            <h3>コメント（任意）</h3>
+            <textarea id="comment" placeholder="面白かった点、印象に残ったネタなど、自由にコメントをお聞かせください。"></textarea>
+            <div class="char-count"><span id="charCount">0</span>/200文字</div>
+          </div>
+
+          <button class="btn-primary full-width" onclick="submitRating()" id="submitBtn" disabled>評価を送信</button>
+        </div>
+
+        <!-- 送信完了表示 -->
+        <div class="survey-success" id="surveySuccess" style="display: none">
+          <div class="success-icon">
+            <span class="material-icons">check_circle</span>
+          </div>
+          <h3>評価を送信しました！</h3>
+          <p>ご協力ありがとうございました。</p>
+          <div class="next-info">
+            <p>次の芸人さんの評価をお待ちください...</p>
+            <button class="btn-secondary-purple" onclick="checkForNextPerformer()">更新して確認</button>
+          </div>
+        </div>
+
+        <!-- 全て完了表示 -->
+        <div class="survey-complete" id="surveyComplete" style="display: none">
+          <div class="complete-icon">🎉</div>
+          <h3>すべての評価が完了しました！</h3>
+          <p>本日はお笑いライブにご参加いただき、ありがとうございました。</p>
+          <p>皆様の評価が芸人さんの今後の活動に役立てられます。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 評価済み表示 -->
+    <div class="already-rated" id="alreadyRated" style="display: none">
+      <div class="info-icon">
+        <span class="material-icons">info</span>
+      </div>
+      <h3>この芸人さんは既に評価済みです</h3>
+      <p>ご協力ありがとうございました。</p>
+      <button class="btn-secondary-purple" onclick="checkForNextPerformer()">次の芸人さんをチェック</button>
+    </div>
+
+    <!-- Global Bottom Navigation (Mobile) -->
+    <nav class="global-nav">
+      <a href="index.html" class="nav-item">
+        <span class="material-icons">home</span>
+        <span>ホーム</span>
+      </a>
+      <a href="live-detail.html" class="nav-item">
+        <span class="material-icons">dashboard</span>
+        <span>管理</span>
+      </a>
+      <a href="create-survey.html" class="nav-item">
+        <span class="material-icons">add_circle</span>
+        <span>作成</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <span class="material-icons">account_circle</span>
+        <span>アカウント</span>
+      </a>
+    </nav>
+
+    <script src="survey-script.js"></script>
+    <script src="navigation.js"></script>
+    <script>
+      // Header scroll functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        let lastScrollTop = 0;
+        let isScrolling = false;
+        const header = document.querySelector(".logo-header");
+        const scrollThreshold = 5; // Minimum scroll distance to trigger
+
+        if (!header) {
+          console.error("Header element not found");
+          return;
+        }
+
+        function handleScroll() {
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          let scrollDifference = Math.abs(scrollTop - lastScrollTop);
+
+          // Only react if scroll difference is significant enough
+          if (scrollDifference < scrollThreshold) {
+            return;
+          }
+
+          if (scrollTop > 100) {
+            if (scrollTop < lastScrollTop - scrollThreshold) {
+              // Scrolling up significantly - show header
+              header.classList.add("show");
+            } else if (scrollTop > lastScrollTop + scrollThreshold) {
+              // Scrolling down significantly - hide header
+              header.classList.remove("show");
+            }
+          } else {
+            // At top of page - hide header
+            header.classList.remove("show");
+          }
+
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+
+        function throttle(func, wait) {
+          let timeout;
+          return function executedFunction(...args) {
+            const later = () => {
+              clearTimeout(timeout);
+              func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+          };
+        }
+
+        window.addEventListener("scroll", throttle(handleScroll, 100), { passive: true });
+      });
+    </script>
+  </body>
+</html>
