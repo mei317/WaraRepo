@@ -69,24 +69,57 @@
 
     <div class="app">
       <div class="container main-content" id="mainContent">
+        <!-- ライブ情報 -->
+        <div class="live-info-header">
+          <div class="live-selector">
+            <div class="custom-dropdown" id="customDropdown">
+              <div class="dropdown-selected" onclick="toggleDropdown()">
+                <div class="live-title">小猿ライブ！</div>
+                <div class="live-datetime">2024年3月15日 19:00</div>
+                <span class="material-icons dropdown-arrow">expand_more</span>
+              </div>
+              <div class="dropdown-options" id="dropdownOptions">
+                <div class="dropdown-option" onclick="selectLive('sample')">
+                  <div class="live-title">小猿ライブ！</div>
+                  <div class="live-datetime">2024年3月15日 19:00</div>
+                </div>
+                <div class="dropdown-option" onclick="selectLive('past1')">
+                  <div class="live-title">肉食ライブ！</div>
+                  <div class="live-datetime">2024年3月10日 18:00</div>
+                </div>
+                <div class="dropdown-option" onclick="selectLive('past2')">
+                  <div class="live-title">疾風迅雷舞！</div>
+                  <div class="live-datetime">2024年3月05日 19:30</div>
+                </div>
+                <div class="dropdown-option" onclick="selectLive('past3')">
+                  <div class="live-title">大首領大猿ライブ！</div>
+                  <div class="live-datetime">2024年2月28日 20:00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
         <!-- 統計概要 -->
-        <div class="stats-overview">
+        <div class="stats-overview" id="statsOverview">
           <div class="stat-card">
-            <div class="stat-number">23</div>
+            <div class="stat-number" id="totalResponses">23</div>
             <div class="stat-label">総回答数</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">5</div>
+            <div class="stat-number" id="totalPerformers">5</div>
             <div class="stat-label">出演組数</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">4.2</div>
+            <div class="stat-number" id="averageRating">4.2</div>
             <div class="stat-label">平均評価</div>
           </div>
         </div>
 
         <!-- 結果一覧 -->
-        <div class="results-list">
+        <div class="results-list" id="resultsList">
           <div class="result-card">
             <div class="result-header">
               <h3>ドドん</h3>
@@ -209,6 +242,161 @@
       function toggleFabMenu() {
         const fabMenu = document.getElementById('fabMenu');
         fabMenu.classList.toggle('open');
+      }
+
+      // ライブデータ
+      const liveData = {
+        sample: {
+          title: "小猿ライブ！",
+          date: "2024年3月15日 19:00",
+          stats: { responses: 67, performers: 8, rating: 4.3 },
+          results: [
+            { name: "ドドん", responses: 12, rating: 4.5, comments: 12 },
+            { name: "ダンシングヒーロー", responses: 11, rating: 3.8, comments: 11 },
+            { name: "笑太郎", responses: 9, rating: 4.2, comments: 9 },
+            { name: "コメディ王", responses: 8, rating: 4.6, comments: 8 },
+            { name: "お笑い兄弟", responses: 10, rating: 4.1, comments: 10 },
+            { name: "ギャグマスター", responses: 7, rating: 4.4, comments: 7 },
+            { name: "バラエティーズ", responses: 6, rating: 4.0, comments: 6 },
+            { name: "ネタ職人", responses: 4, rating: 4.7, comments: 4 }
+          ]
+        },
+        past1: {
+          title: "肉食ライブ！",
+          date: "2024年3月10日 18:00",
+          stats: { responses: 45, performers: 3, rating: 4.5 },
+          results: [
+            { name: "肉食系男子", responses: 15, rating: 4.7, comments: 15 },
+            { name: "ステーキ師匠", responses: 15, rating: 4.3, comments: 15 },
+            { name: "焼肉兄弟", responses: 15, rating: 4.5, comments: 15 }
+          ]
+        },
+        past2: {
+          title: "疾風迅雷舞！",
+          date: "2024年3月05日 19:30",
+          stats: { responses: 38, performers: 4, rating: 4.1 },
+          results: [
+            { name: "疾風", responses: 10, rating: 4.2, comments: 10 },
+            { name: "迅雷", responses: 9, rating: 4.0, comments: 9 },
+            { name: "舞踊団", responses: 10, rating: 4.1, comments: 10 },
+            { name: "スピード王", responses: 9, rating: 4.1, comments: 9 }
+          ]
+        },
+        past3: {
+          title: "大首領大猿ライブ！",
+          date: "2024年2月28日 20:00",
+          stats: { responses: 67, performers: 6, rating: 4.3 },
+          results: [
+            { name: "大首領", responses: 12, rating: 4.6, comments: 12 },
+            { name: "大猿", responses: 11, rating: 4.2, comments: 11 },
+            { name: "猿まわし", responses: 11, rating: 4.1, comments: 11 },
+            { name: "バナナ団", responses: 11, rating: 4.3, comments: 11 },
+            { name: "ゴリラーズ", responses: 11, rating: 4.4, comments: 11 },
+            { name: "モンキービジネス", responses: 11, rating: 4.2, comments: 11 }
+          ]
+        }
+      };
+
+      function toggleDropdown() {
+        const dropdown = document.getElementById('customDropdown');
+        dropdown.classList.toggle('open');
+      }
+
+      function selectLive(value) {
+        const data = liveData[value];
+        
+        // 選択されたオプションを表示
+        const selected = document.querySelector('.dropdown-selected');
+        selected.querySelector('.live-title').textContent = data.title;
+        selected.querySelector('.live-datetime').textContent = data.date;
+        
+        // ドロップダウンを閉じる
+        document.getElementById('customDropdown').classList.remove('open');
+        
+        // モーダルやメニューを閉じる
+        closeAllOverlays();
+        
+        changeLive(value);
+      }
+
+      function closeAllOverlays() {
+        // ハンバーガーメニューを閉じる
+        const sideNav = document.getElementById('sideNav');
+        const navOverlay = document.getElementById('navOverlay');
+        if (sideNav) sideNav.classList.remove('open');
+        if (navOverlay) navOverlay.classList.remove('open');
+        
+        // FABメニューを閉じる
+        const fabMenu = document.getElementById('fabMenu');
+        if (fabMenu) fabMenu.classList.remove('open');
+        
+        // その他のモーダルがあれば閉じる
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }
+
+      function changeLive(selectedLive) {
+        const data = liveData[selectedLive];
+
+
+        // 統計情報更新
+        document.getElementById('totalResponses').textContent = data.stats.responses;
+        document.getElementById('totalPerformers').textContent = data.stats.performers;
+        document.getElementById('averageRating').textContent = data.stats.rating;
+
+        // 結果一覧更新
+        const resultsList = document.getElementById('resultsList');
+        resultsList.innerHTML = '';
+
+        data.results.forEach(result => {
+          const resultCard = document.createElement('div');
+          resultCard.className = 'result-card';
+          resultCard.innerHTML = `
+            <div class="result-header">
+              <h3>${result.name}</h3>
+            </div>
+            <div class="result-content">
+              <div class="result-details">
+                <p>回答数: ${result.responses}件</p>
+                <div class="rating-breakdown">
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">${Math.floor(result.responses * 0.6)}</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">${Math.floor(result.responses * 0.3)}</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">${Math.floor(result.responses * 0.1)}</span>
+                  </span></span>
+                </div>
+              </div>
+              <div class="result-footer">
+                <div class="rating"><span class="material-icons">star</span> ${result.rating}</div>
+                <div class="comment-section" onclick="showComments('${result.name}')">
+                  <span class="comment-icon">
+                    <span class="material-icons">chat_bubble</span>
+                  </span>
+                  <span class="comment-label">${result.comments} comment</span>
+                </div>
+              </div>
+            </div>
+          `;
+          resultsList.appendChild(resultCard);
+        });
       }
     </script>
   </body>

@@ -75,20 +75,16 @@
           </div>
 
           <div class="performers-list" id="performersList">
-            <div class="performer-card current">
+            <div class="performer-card">
               <div class="performer-info">
                 <div class="performer-order">1</div>
                 <div class="performer-details">
-                  <h3>サンプル芸人A</h3>
-                  <p>コント・漫才</p>
-                </div>
-                <div class="performer-status">
-                  <div class="status-badge current">評価中</div>
+                  <h3>ドドん</h3>
                 </div>
               </div>
               <div class="performer-actions">
                 <button class="btn-small btn-secondary-purple" onclick="editPerformer('1')">編集</button>
-                <button class="btn-small" onclick="removePerformer('1')" style="background: #ffe4c7; color: #343a40;">削除</button>
+                <button class="btn-small" onclick="removePerformer('1')" style="background: #343a40; color: #fefefe;">削除</button>
               </div>
             </div>
 
@@ -96,16 +92,90 @@
               <div class="performer-info">
                 <div class="performer-order">2</div>
                 <div class="performer-details">
-                  <h3>サンプル芸人B</h3>
-                  <p>漫才</p>
-                </div>
-                <div class="performer-status">
-                  <div class="status-badge waiting">待機中</div>
+                  <h3>ダンシングヒーロー</h3>
                 </div>
               </div>
               <div class="performer-actions">
                 <button class="btn-small btn-secondary-purple" onclick="editPerformer('2')">編集</button>
-                <button class="btn-small" onclick="removePerformer('2')" style="background: #ffe4c7; color: #343a40;">削除</button>
+                <button class="btn-small" onclick="removePerformer('2')" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">3</div>
+                <div class="performer-details">
+                  <h3>笑太郎</h3>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small btn-secondary-purple" onclick="editPerformer('3')">編集</button>
+                <button class="btn-small" onclick="removePerformer('3')" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">4</div>
+                <div class="performer-details">
+                  <h3>コメディ王</h3>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small btn-secondary-purple" onclick="editPerformer('4')">編集</button>
+                <button class="btn-small" onclick="removePerformer('4')" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">5</div>
+                <div class="performer-details">
+                  <h3>お笑い兄弟</h3>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small btn-secondary-purple" onclick="editPerformer('5')">編集</button>
+                <button class="btn-small" onclick="removePerformer('5')" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">6</div>
+                <div class="performer-details">
+                  <h3>ギャグマスター</h3>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small btn-secondary-purple" onclick="editPerformer('6')">編集</button>
+                <button class="btn-small" onclick="removePerformer('6')" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">7</div>
+                <div class="performer-details">
+                  <h3>バラエティーズ</h3>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small btn-secondary-purple" onclick="editPerformer('7')">編集</button>
+                <button class="btn-small" onclick="removePerformer('7')" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="performer-card">
+              <div class="performer-info">
+                <div class="performer-order">8</div>
+                <div class="performer-details">
+                  <h3>ネタ職人</h3>
+                </div>
+              </div>
+              <div class="performer-actions">
+                <button class="btn-small btn-secondary-purple" onclick="editPerformer('8')">編集</button>
+                <button class="btn-small" onclick="removePerformer('8')" style="background: #343a40; color: #fefefe;">削除</button>
               </div>
             </div>
           </div>
@@ -133,13 +203,12 @@
             <input type="text" id="performerName" placeholder="例：お笑いコンビ名" required />
           </div>
           <div class="form-group">
-            <label>ネタのジャンル</label>
-            <select id="performerGenre">
-              <option value="コント">コント</option>
-              <option value="漫才">漫才</option>
-              <option value="ピン芸">ピン芸</option>
-              <option value="その他">その他</option>
-            </select>
+            <label>LINE ID</label>
+            <input type="text" id="performerLineId" placeholder="例：@comedy_duo" />
+          </div>
+          <div class="form-group">
+            <label>メールアドレス</label>
+            <input type="email" id="performerEmail" placeholder="例：comedy@example.com" />
           </div>
           <div class="modal-actions">
             <button type="button" class="btn-secondary" onclick="closeModal()">キャンセル</button>
@@ -174,6 +243,63 @@
         const fabMenu = document.getElementById('fabMenu');
         fabMenu.classList.toggle('open');
       }
+
+      function showAddPerformerModal() {
+        const modal = document.getElementById('addPerformerModal');
+        modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }
+
+      function editPerformer(id) {
+        alert(`芸人${id}の編集機能は未実装です`);
+      }
+
+      function removePerformer(id) {
+        if (confirm('この芸人を削除しますか？')) {
+          alert(`芸人${id}を削除しました`);
+        }
+      }
+
+      function previousPerformer() {
+        alert('前の芸人に戻る機能は未実装です');
+      }
+
+      function nextPerformer() {
+        alert('次の芸人に進む機能は未実装です');
+      }
+
+      // モーダル外クリックで閉じる
+      window.onclick = function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      }
+
+      // フォーム送信処理
+      document.getElementById('addPerformerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const performerName = document.getElementById('performerName').value;
+        const lineId = document.getElementById('performerLineId').value;
+        const email = document.getElementById('performerEmail').value;
+        
+        if (performerName) {
+          alert(`${performerName}を追加しました`);
+          closeModal();
+          // フォームをリセット
+          document.getElementById('performerName').value = '';
+          document.getElementById('performerLineId').value = '';
+          document.getElementById('performerEmail').value = '';
+        }
+      });
     </script>
   </body>
 </html>
