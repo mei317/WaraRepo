@@ -71,18 +71,16 @@
           <p>お笑いライブアンケート</p>
         </div>
 
-
         <div class="welcome-message">
           <p>こんにちは、<span id="userName">主催者</span>さん！</p>
         </div>
-
 
         <div class="lives-section">
           <h2>ライブ一覧</h2>
           <div class="lives-list" id="livesList">
             <div class="live-card active">
               <div class="live-header">
-                <h3>サンプルライブ</h3>
+                <h3>小猿ライブ！</h3>
                 <div class="live-status active">進行中</div>
               </div>
               <div class="live-info">
@@ -97,7 +95,37 @@
 
             <div class="live-card">
               <div class="live-header">
-                <h3>過去のライブ例</h3>
+                <h3>肉食ライブ！</h3>
+                <div class="live-status completed">終了</div>
+              </div>
+              <div class="live-info">
+                <p><span class="material-icons">event</span> 2024年3月10日 18:00</p>
+                <p><span class="material-icons">theater_comedy</span> 3組の芸人が参加</p>
+                <p><span class="material-icons">analytics</span> 45件の回答</p>
+              </div>
+              <div class="live-actions">
+                <button class="btn-skyblue full-width" onclick="goToResults('past')">集計結果を見る</button>
+              </div>
+            </div>
+
+            <div class="live-card">
+              <div class="live-header">
+                <h3>疾風迅雷舞！</h3>
+                <div class="live-status completed">終了</div>
+              </div>
+              <div class="live-info">
+                <p><span class="material-icons">event</span> 2024年3月10日 18:00</p>
+                <p><span class="material-icons">theater_comedy</span> 3組の芸人が参加</p>
+                <p><span class="material-icons">analytics</span> 45件の回答</p>
+              </div>
+              <div class="live-actions">
+                <button class="btn-skyblue full-width" onclick="goToResults('past')">集計結果を見る</button>
+              </div>
+            </div>
+
+            <div class="live-card">
+              <div class="live-header">
+                <h3>大首領大猿ライブ！</h3>
                 <div class="live-status completed">終了</div>
               </div>
               <div class="live-info">
@@ -166,8 +194,8 @@
     <script src="navigation.js"></script>
     <script>
       function toggleFabMenu() {
-        const fabMenu = document.getElementById('fabMenu');
-        fabMenu.classList.toggle('open');
+        const fabMenu = document.getElementById("fabMenu");
+        fabMenu.classList.toggle("open");
       }
     </script>
   </body>
