@@ -27,14 +27,8 @@ class NavigationController {
         const wasMobile = this.isMobile;
         this.isMobile = window.innerWidth < 768;
         
-        if (this.isMobile) {
-            // モバイル: サイドメニュー非表示、グローバルナビ表示
-            this.menuToggle.style.display = 'none';
-            if (this.isOpen) {
-                this.closeSideNav();
-            }
-        } else {
-            // PC: メニュートグルボタン表示
+        // ハンバーガーメニューは常時表示
+        if (this.menuToggle) {
             this.menuToggle.style.display = 'flex';
         }
         
@@ -62,8 +56,8 @@ class NavigationController {
             const endX = e.changedTouches[0].clientX;
             const diffX = startX - endX;
             
-            // 左スワイプでサイドメニューを閉じる
-            if (diffX > 50 && this.isOpen) {
+            // 右スワイプでサイドメニューを閉じる（右からスライドするため）
+            if (diffX < -50 && this.isOpen) {
                 this.closeSideNav();
             }
         });
@@ -84,14 +78,14 @@ class NavigationController {
         this.sideNav.classList.add('active');
         this.navOverlay.classList.add('active');
         
-        if (!this.isMobile) {
+        // PCでのみコンテンツをシフト
+        if (!this.isMobile && this.mainContent) {
             this.mainContent.classList.add('shifted');
         }
         
-        // ボタンアイコンを×に変更
-        const icon = this.menuToggle.querySelector('.material-icons');
-        if (icon) {
-            icon.textContent = 'close';
+        // ハンバーガーボタンを×に変形
+        if (this.menuToggle) {
+            this.menuToggle.classList.add('active');
         }
     }
 
@@ -101,12 +95,15 @@ class NavigationController {
         this.isOpen = false;
         this.sideNav.classList.remove('active');
         this.navOverlay.classList.remove('active');
-        this.mainContent.classList.remove('shifted');
         
-        // ボタンアイコンをメニューに戻す
-        const icon = this.menuToggle.querySelector('.material-icons');
-        if (icon) {
-            icon.textContent = 'menu';
+        // コンテンツシフトを解除
+        if (this.mainContent) {
+            this.mainContent.classList.remove('shifted');
+        }
+        
+        // ハンバーガーボタンを元に戻す
+        if (this.menuToggle) {
+            this.menuToggle.classList.remove('active');
         }
     }
 
@@ -116,16 +113,6 @@ class NavigationController {
         // サイドナビゲーションのアクティブ設定
         const sideNavItems = document.querySelectorAll('.side-nav-item');
         sideNavItems.forEach(item => {
-            item.classList.remove('active');
-            const href = item.getAttribute('href');
-            if (href && this.isCurrentPage(href, currentPage)) {
-                item.classList.add('active');
-            }
-        });
-        
-        // グローバルナビゲーションのアクティブ設定
-        const globalNavItems = document.querySelectorAll('.global-nav .nav-item');
-        globalNavItems.forEach(item => {
             item.classList.remove('active');
             const href = item.getAttribute('href');
             if (href && this.isCurrentPage(href, currentPage)) {
@@ -170,8 +157,8 @@ function toggleSideNav() {
 document.addEventListener('DOMContentLoaded', function() {
     window.navController = new NavigationController();
     
-    // ナビゲーションリンクにアニメーション効果を追加
-    const navLinks = document.querySelectorAll('.nav-item, .side-nav-item');
+    // サイドナビゲーションリンクにアニメーション効果を追加
+    const navLinks = document.querySelectorAll('.side-nav-item');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             // 外部リンクや#リンクの場合は通常動作
@@ -193,29 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// モバイルでのスクロール時にナビゲーションを隠す/表示する
-let lastScrollTop = 0;
-let scrollTimeout;
-
-window.addEventListener('scroll', function() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // モバイルナビゲーションの表示制御
-    if (window.navController && window.navController.isMobile) {
-        const globalNav = document.querySelector('.global-nav');
-        if (globalNav) {
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // 下スクロール時に隠す
-                globalNav.style.transform = 'translateY(calc(100% + 32px))';
-            } else {
-                // 上スクロール時に表示
-                globalNav.style.transform = 'translateY(0)';
-            }
-        }
-    }
-    
-    lastScrollTop = scrollTop;
-});
+// スクロール時の処理は削除（ボトムナビがないため不要）
 
 // タブの可視性変更時の処理（ページに戻った時にナビの状態をリセット）
 document.addEventListener('visibilitychange', function() {

@@ -11,13 +11,20 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="login-page">
+    <!-- App Header -->
+    <header class="app-header">
+      <a href="index.html" class="logo">ｗｗｗレポ</a>
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleSideNav()">
+          <span class="material-icons">menu</span>
+        </button>
+      </div>
+    </header>
+
     <div class="app">
         <div class="container">
             <div class="header">
-                <button class="back-btn" onclick="history.back()">
-                    <span class="material-icons">arrow_back</span>
-                </button>
                 <h1>ログイン</h1>
             </div>
             
@@ -59,7 +66,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Side Navigation -->
+    <nav class="side-nav" id="sideNav">
+      <div class="side-nav-header">
+        <h2>ｗｗｗレポ</h2>
+        <p>お笑いライブアンケート</p>
+      </div>
+      <div class="side-nav-menu">
+        <a href="index.html" class="side-nav-item">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a href="account.html" class="side-nav-item">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a href="live-detail.html" class="side-nav-item">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a href="results.html" class="side-nav-item">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a href="settings.html" class="side-nav-item">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="side-nav-item" onclick="handleLogout()">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleSideNav()"></div>
     
     <script src="script.js"></script>
+    <script src="navigation.js"></script>
 </body>
 </html>

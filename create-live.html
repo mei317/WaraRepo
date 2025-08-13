@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ライブ作成 - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="app-header">
+      <button class="back-btn" onclick="history.back()">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h1 class="page-title">ライブ作成</h1>
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleSideNav()">
+          <div class="hamburger-line"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <nav class="side-nav" id="sideNav">
+      <div class="side-nav-header">
+        <div class="nav-header-content">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="nav-close-btn" onclick="toggleSideNav()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="side-nav-menu">
+        <a href="index.html" class="side-nav-item">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a href="account.html" class="side-nav-item">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a href="live-detail.html" class="side-nav-item">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a href="results.html" class="side-nav-item">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a href="settings.html" class="side-nav-item">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="side-nav-item" onclick="handleLogout()">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleSideNav()"></div>
+
+    <div class="app">
+      <div class="container main-content" id="mainContent">
+        <div class="logo-header">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <div class="header reset-flex">
+          <h1>新しいライブを作成</h1>
+          <p>ライブの基本情報を入力してください。</p>
+        </div>
+
+        <div class="live-info-card">
+          <h3>基本情報</h3>
+          <div class="form-group">
+            <label for="liveName">ライブ名</label>
+            <input type="text" id="liveName" placeholder="例：第10回お笑いライブ" required />
+          </div>
+          <div class="form-group">
+            <label for="liveDate">開催日時</label>
+            <input type="datetime-local" id="liveDate" required />
+          </div>
+          <div class="form-group">
+            <label for="venue">会場名</label>
+            <input type="text" id="venue" placeholder="例：〇〇ホール" />
+          </div>
+          <div class="form-group">
+            <label for="description">ライブ説明</label>
+            <textarea id="description" placeholder="ライブの説明や注意事項を入力してください"></textarea>
+          </div>
+        </div>
+
+        <div class="live-info-card">
+          <h3>出演者設定</h3>
+          <div class="form-group">
+            <label for="performerCount">予定出演者数</label>
+            <select id="performerCount">
+              <option value="3">3組</option>
+              <option value="5" selected>5組</option>
+              <option value="7">7組</option>
+              <option value="10">10組</option>
+              <option value="custom">その他</option>
+            </select>
+          </div>
+          <div class="form-group" id="customCountGroup" style="display: none;">
+            <label for="customCount">カスタム出演者数</label>
+            <input type="number" id="customCount" min="1" max="50" placeholder="数を入力" />
+          </div>
+        </div>
+
+        <div class="live-info-card">
+          <h3>公開設定</h3>
+          <div class="form-group">
+            <label>
+              <input type="radio" name="liveVisibility" value="public" checked />
+              パブリック（一般公開）
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="radio" name="liveVisibility" value="private" />
+              プライベート（招待制）
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="allowLiveChat" />
+              ライブチャット機能を有効にする
+            </label>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-secondary full-width" onclick="saveLiveDraft()">
+            <span class="material-icons">save</span>
+            下書き保存
+          </button>
+          <button class="btn-primary full-width" onclick="createLive()">
+            <span class="material-icons">event</span>
+            ライブを作成
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Menu -->
+    <div class="fab-menu" id="fabMenu">
+      <div class="fab-backdrop" onclick="toggleFabMenu()"></div>
+      <div class="fab-options">
+        <a href="create-survey.html" class="fab-option">
+          <span class="material-icons">quiz</span>
+          <span class="fab-label">アンケート作成</span>
+        </a>
+        <a href="create-live.html" class="fab-option active">
+          <span class="material-icons">event</span>
+          <span class="fab-label">ライブ作成</span>
+        </a>
+      </div>
+      <button class="fab" onclick="toggleFabMenu()">
+        <span class="material-icons">add</span>
+      </button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+    <script>
+      // Performer count selection handler
+      document.getElementById('performerCount').addEventListener('change', function() {
+        const customCountGroup = document.getElementById('customCountGroup');
+        if (this.value === 'custom') {
+          customCountGroup.style.display = 'block';
+        } else {
+          customCountGroup.style.display = 'none';
+        }
+      });
+
+      function saveLiveDraft() {
+        const liveName = document.getElementById('liveName').value;
+        if (!liveName) {
+          alert('ライブ名を入力してください。');
+          return;
+        }
+        alert('ライブの下書きを保存しました');
+      }
+
+      function createLive() {
+        const liveName = document.getElementById('liveName').value;
+        const liveDate = document.getElementById('liveDate').value;
+        const venue = document.getElementById('venue').value;
+
+        if (!liveName || !liveDate) {
+          alert('ライブ名と開催日時を入力してください。');
+          return;
+        }
+
+        // ライブ作成処理をシミュレート
+        alert(`「${liveName}」を作成しました！\n\n次はアンケートを作成してライブを開始できます。`);
+        
+        // ホームページに戻る
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
+      }
+
+      function toggleFabMenu() {
+        const fabMenu = document.getElementById('fabMenu');
+        fabMenu.classList.toggle('open');
+      }
+    </script>
+  </body>
+</html>

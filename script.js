@@ -113,6 +113,10 @@ function goToLiveDetail(liveId) {
     window.location.href = `live-detail.html?id=${liveId}`;
 }
 
+function goToResults(liveId) {
+    window.location.href = `results.html?id=${liveId}`;
+}
+
 function showQRInfo() {
     alert('QRコードは各ライブの管理画面で生成されます。\n主催者の方はまずログインしてライブを作成してください。');
 }
@@ -136,7 +140,7 @@ function handleLogin() {
         
         localStorage.setItem('wwwrepo_user', JSON.stringify(user));
         alert('ログインしました！');
-        goToAdmin();
+        window.location.href = 'index.html';
     } else {
         alert('パスワードは6文字以上で入力してください。');
     }
@@ -165,7 +169,7 @@ function showSignup() {
         
         localStorage.setItem('wwwrepo_user', JSON.stringify(user));
         alert('アカウントを作成しました！');
-        goToAdmin();
+        window.location.href = 'index.html';
     } else {
         alert('すべての項目を正しく入力してください。');
     }

@@ -12,16 +12,28 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Menu Toggle Button (PC) -->
-    <button class="menu-toggle" onclick="toggleSideNav()">
-      <span class="material-icons">menu</span>
-    </button>
+    <!-- App Header -->
+    <header class="app-header">
+      <button class="back-btn" onclick="history.back()">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <div class="header-actions">
+        <button class="menu-toggle" onclick="toggleSideNav()">
+          <div class="hamburger-line"></div>
+        </button>
+      </div>
+    </header>
 
     <!-- Side Navigation (PC) -->
     <nav class="side-nav" id="sideNav">
       <div class="side-nav-header">
-        <h2>ｗｗｗレポ</h2>
-        <p>お笑いライブアンケート</p>
+        <div class="nav-header-content">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="nav-close-btn" onclick="toggleSideNav()">
+          <span class="material-icons">close</span>
+        </button>
       </div>
       <div class="side-nav-menu">
         <a href="index.html" class="side-nav-item">
@@ -32,20 +44,22 @@
           <span class="material-icons">account_circle</span>
           アカウント
         </a>
-        <div class="side-nav-section">
-          <div class="side-nav-section-title">管理者メニュー</div>
-          <a href="live-detail.html" class="side-nav-item">
-            <span class="material-icons">event</span>
-            ライブ管理
-          </a>
-        </div>
-        <div class="side-nav-section">
-          <div class="side-nav-section-title">観客メニュー</div>
-          <a href="create-survey.html" class="side-nav-item">
-            <span class="material-icons">add_circle</span>
-            アンケート作成
-          </a>
-        </div>
+        <a href="live-detail.html" class="side-nav-item">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a href="results.html" class="side-nav-item">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a href="settings.html" class="side-nav-item">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="side-nav-item" onclick="handleLogout()">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
       </div>
     </nav>
 
@@ -54,6 +68,9 @@
 
     <div class="app">
       <div class="container main-content" id="mainContent">
+        <div class="header">
+          <h1>管理ダッシュボード</h1>
+        </div>
         <div class="admin-placeholder">
           <div class="placeholder-content">
             <h2>管理機能</h2>
@@ -93,27 +110,31 @@
       </div>
     </div>
 
-    <!-- Global Bottom Navigation (Mobile) -->
-    <nav class="global-nav">
-      <a href="index.html" class="nav-item">
-        <span class="material-icons">home</span>
-        <span>ホーム</span>
-      </a>
-      <a href="live-detail.html" class="nav-item">
-        <span class="material-icons">dashboard</span>
-        <span>管理</span>
-      </a>
-      <a href="create-survey.html" class="nav-item">
-        <span class="material-icons">add_circle</span>
-        <span>作成</span>
-      </a>
-      <a href="account.html" class="nav-item">
-        <span class="material-icons">account_circle</span>
-        <span>アカウント</span>
-      </a>
-    </nav>
+    <!-- Floating Menu -->
+    <div class="fab-menu" id="fabMenu">
+      <div class="fab-backdrop" onclick="toggleFabMenu()"></div>
+      <div class="fab-options">
+        <a href="create-survey.html" class="fab-option">
+          <span class="material-icons">quiz</span>
+          <span class="fab-label">アンケート作成</span>
+        </a>
+        <a href="create-live.html" class="fab-option">
+          <span class="material-icons">event</span>
+          <span class="fab-label">ライブ作成</span>
+        </a>
+      </div>
+      <button class="fab" onclick="toggleFabMenu()">
+        <span class="material-icons">add</span>
+      </button>
+    </div>
 
     <script src="script.js"></script>
     <script src="navigation.js"></script>
+    <script>
+      function toggleFabMenu() {
+        const fabMenu = document.getElementById('fabMenu');
+        fabMenu.classList.toggle('open');
+      }
+    </script>
   </body>
 </html>

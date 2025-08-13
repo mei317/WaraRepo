@@ -29,7 +29,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   padding: 20px;
-  padding-top: 40px;
+  padding-top: 84px;
 }
 
 .container {
@@ -66,7 +66,46 @@ p {
   color: #6c757d;
 }
 
-/* Header */
+/* App Header */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #fefefe;
+  border-bottom: 2px solid #343a40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-header .logo {
+  font-size: 1.5rem;
+  color: #343a40;
+  font-family: "Kosugi Maru", sans-serif;
+  text-decoration: none;
+}
+
+.app-header .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-header .page-title {
+  font-size: 1.2rem;
+  color: #343a40;
+  font-family: "Kosugi Maru", sans-serif;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+/* Page Header */
 .header {
   display: flex;
   align-items: center;
@@ -75,9 +114,21 @@ p {
   padding: 0 0.5rem;
 }
 
+.header-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .header.reset-flex {
-    display: block;
-}  
+  display: block;
+}
 
 .back-btn,
 .settings-btn,
@@ -135,7 +186,11 @@ p {
 /* Logo */
 .logo {
   text-align: center;
-  margin-bottom: 2rem;
+}
+
+/* Welcome message */
+.welcome-message {
+  margin-bottom: 1rem;
 }
 
 .logo h1 {
@@ -152,7 +207,7 @@ p {
 .result-card {
   background: #fefefe;
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   margin-bottom: 1rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border: 2px solid #343a40;
@@ -160,7 +215,64 @@ p {
 }
 
 .result-card {
-    padding: 0;
+  padding: 0;
+}
+
+.result-content {
+  padding: 1rem;
+}
+
+.result-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.comment-section:hover {
+  transform: scale(1.05);
+}
+
+.comment-section:hover .comment-icon,
+.comment-section:hover .comment-label {
+  color: #65cdbf;
+}
+
+.comment-icon {
+  color: #7de7d7;
+  transition: color 0.3s ease;
+}
+
+.comment-label {
+  color: #7de7d7;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.rating-breakdown .stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating-breakdown .stars .material-icons {
+  color: #ffd700;
+  font-size: 14px;
+}
+
+.rating-breakdown .count {
+  color: #343a40;
+  margin-left: 6px;
+  font-size: 0.9rem;
 }
 
 .welcome-card:hover,
@@ -225,7 +337,7 @@ p {
 
 /* Alternative secondary button for variety */
 .btn-secondary-purple {
-  background: #e8ddf8;
+  background: #c6bcf8;
   color: #343a40;
   border: 2px solid #343a40;
   border-radius: 16px;
@@ -243,10 +355,10 @@ p {
 }
 
 .btn-secondary-purple:hover {
-  background: #dcc9f5;
+  background: #b8a9f5;
   border-color: #495057;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(232, 221, 248, 0.4);
+  box-shadow: 0 4px 12px rgba(198, 188, 248, 0.4);
 }
 
 .btn-green {
@@ -279,7 +391,7 @@ p {
 }
 
 .btn-skyblue {
-  background: #c6e2ff;
+  background: #d6f2fe;
   color: #343a40;
   border-color: #343a40;
   padding: 1.125rem 1rem;
@@ -287,15 +399,15 @@ p {
 
 /* Apply purple secondary style to small buttons too */
 .btn-small.btn-secondary-purple {
-  background: #e8ddf8;
+  background: #c6bcf8;
   color: #343a40;
 }
 
 .btn-small.btn-secondary-purple:hover {
-  background: #dcc9f5;
+  background: #b8a9f5;
   border-color: #495057;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(232, 221, 248, 0.4);
+  box-shadow: 0 4px 12px rgba(198, 188, 248, 0.4);
 }
 
 .btn-small.btn-green {
@@ -324,12 +436,16 @@ p {
 }
 
 .btn-small.danger {
-  background: #dc3545;
-  color: white;
+  background: #ffe4c7;
+  color: #343a40;
+  border: 2px solid #343a40;
 }
 
 .btn-small.danger:hover {
-  background: #c82333;
+  background: #ffd6a5;
+  border-color: #495057;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 228, 199, 0.4);
 }
 
 .full-width {
@@ -346,6 +462,12 @@ p {
   margin-bottom: 1rem;
   padding: 1.25rem 1.5rem;
   min-height: 56px;
+}
+
+.login-page .btn-social {
+  padding: 1rem 1.5rem;
+  min-height: 48px;
+  margin-bottom: 0.8rem;
 }
 
 .btn-social.google {
@@ -427,22 +549,55 @@ textarea {
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #28a745;
+  color: #343a40;
   font-size: 1rem;
   pointer-events: none;
 }
 
 /* Login form specific */
 .login-form {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Login page layout */
+.login-page .app {
+  padding: 20px;
+  padding-top: 120px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.login-page .container {
+  max-width: 400px;
+  width: 100%;
+  margin: 0;
+}
+
+.login-page .header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-page .login-form {
+  margin-bottom: 1rem;
+}
+
+.login-page .signup-link {
+  margin-top: 1rem;
 }
 
 .divider {
   text-align: center;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   position: relative;
   color: #6c757d;
   font-size: 0.8rem;
+}
+
+.login-page .divider {
+  margin: 0.8rem 0;
 }
 
 .divider::before {
@@ -496,6 +651,11 @@ textarea {
 }
 
 /* Live cards */
+.lives-section h2 {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
 .lives-list {
   display: flex;
   flex-direction: column;
@@ -509,26 +669,33 @@ textarea {
   margin-bottom: 0.75rem;
 }
 
+.live-header h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .live-status {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
+  min-width: 60px;
+  text-align: center;
 }
 
 .live-status.active {
-  background: #d1ecf1;
-  color: #0c5460;
+  background: #7ee7d6;
+  color: #343a40;
 }
 
 .live-status.completed {
-  background: #d4edda;
-  color: #155724;
+  background: #343a40;
+  color: #fff;
 }
 
 .live-status.waiting {
   background: #fff3cd;
-  color: #856404;
+  color: #343a40;
 }
 
 .live-info {
@@ -590,7 +757,7 @@ textarea {
 }
 
 .tab.active {
-  background: #c0bff8;
+  background: #c6bcf8;
   color: #495057;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid #343a40;
@@ -606,8 +773,8 @@ textarea {
 
 /* Performer cards */
 .add-performer-section {
-    text-align: end;
-    margin-bottom: 1rem
+  text-align: end;
+  margin-bottom: 1rem;
 }
 .performers-list {
   display: flex;
@@ -735,28 +902,34 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
   border-bottom: #343a40 2px solid;
-  padding: 1rem 1.5rem;
-  background: #F1F2F8;
-border-radius: 20px 20px 0 0;    border-radius: 20px 20px 0 0;
+  padding: 0.7rem 1.5rem;
+  background: #fff9eb;
+  border-radius: 20px 20px 0 0;
 }
 
 .rating {
   font-weight: 600;
-  color: #667eea;
+  color: #343a40;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating .material-icons {
+  color: #ffd700;
+  font-size: 20px;
 }
 
 .rating-breakdown {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
 }
 
 .rating-breakdown span {
-  background: #f8f9fa;
-  padding: 0.25rem 0.5rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 6px;
   font-size: 0.75rem;
 }
@@ -771,6 +944,10 @@ border-radius: 20px 20px 0 0;    border-radius: 20px 20px 0 0;
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.half-width {
+  flex: 1;
 }
 
 .export-buttons .btn-secondary {
@@ -844,7 +1021,7 @@ border-radius: 20px 20px 0 0;    border-radius: 20px 20px 0 0;
 
 /* Comment section */
 .comment-section {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .char-count {
@@ -908,6 +1085,132 @@ border-radius: 20px 20px 0 0;    border-radius: 20px 20px 0 0;
   margin-right: -0.1rem;
 }
 
+/* Floating Action Button Menu */
+.fab-menu {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
+
+.fab-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.fab-menu.open .fab-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fab-options {
+  position: absolute;
+  bottom: 72px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fab-menu.open .fab-options {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+
+.fab-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 2px solid #343a40;
+  border-radius: 28px;
+  color: #343a40;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  min-width: 160px;
+}
+
+.fab-option:hover {
+  background: #f8f9fa;
+  transform: translateX(-4px);
+}
+
+.fab-option.active {
+  background: #c6bcf8;
+  color: #343a40;
+}
+
+.fab-option .material-icons {
+  font-size: 20px;
+}
+
+.fab-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: "Kosugi Maru", sans-serif;
+}
+
+.fab {
+  width: 56px;
+  height: 56px;
+  background: #ffe4c7;
+  border: 2px solid #343a40;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #343a40;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px rgba(255, 228, 199, 0.4);
+  position: relative;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(255, 228, 199, 0.6);
+  background: #ffd5a3;
+}
+
+.fab .material-icons {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.fab-menu.open .fab .material-icons {
+  transform: rotate(45deg);
+}
+
+.fab.extended {
+  width: auto;
+  padding: 0 16px;
+  border-radius: 28px;
+  gap: 8px;
+}
+
+.fab.extended .fab-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: "Kosugi Maru", sans-serif;
+  white-space: nowrap;
+}
+
 /* Social login buttons - English text */
 .btn-social.google,
 .btn-social.facebook {
@@ -922,78 +1225,36 @@ input::placeholder {
 
 /* =================== NAVIGATION MENUS =================== */
 
-/* Global Bottom Navigation (Mobile) */
-.global-nav {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  background: #fefefe;
-  border: 2px solid #343a40;
-  border-radius: 20px;
-  padding: 0.5rem 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: #6c757d;
-  font-size: 0.7rem;
-  font-family: "Kosugi Maru", sans-serif;
-  padding: 0.5rem;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-  min-width: 60px;
-}
-
-.nav-item:hover,
-.nav-item.active {
-  color: #343a40;
-  background: #e8ddf8;
-  transform: translateY(-2px);
-}
-
-.nav-item .material-icons {
-  font-size: 22px;
-  margin-bottom: 0.25rem;
-}
-
-.nav-item span {
-  font-size: 0.6rem;
-  text-align: center;
-  line-height: 1.2;
-}
-
 /* Side Navigation (PC) */
 .side-nav {
   position: fixed;
   top: 0;
-  left: -280px;
+  right: -300px;
   width: 280px;
   height: 100vh;
   background: #fefefe;
-  border-right: 2px solid #343a40;
-  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  transition: left 0.3s ease;
+  border-left: 2px solid #343a40;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   overflow-y: auto;
+  transform: scale(0.95);
 }
 
 .side-nav.active {
-  left: 0;
+  right: 0;
+  transform: scale(1);
 }
 
 .side-nav-header {
-  padding: 2rem 1.5rem 1rem;
-  border-bottom: 2px solid #e8ddf8;
+  padding: 12px 16px 1rem 1.5rem;
+  border-bottom: 2px solid #c6bcf8;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-header-content {
+  flex: 1;
 }
 
 .side-nav-header h2 {
@@ -1005,6 +1266,51 @@ input::placeholder {
 .side-nav-header p {
   color: #6c757d;
   font-size: 0.8rem;
+}
+
+.nav-close-btn {
+  background: #343a40;
+  border: 2px solid #343a40;
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-close-btn:hover {
+  background: #495057;
+  transform: scale(1.05);
+}
+
+/* 閉じるボタンの×線の作成 */
+.nav-close-btn::before,
+.nav-close-btn::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.nav-close-btn::before {
+  transform: rotate(45deg);
+}
+
+.nav-close-btn::after {
+  transform: rotate(-45deg);
+}
+
+/* Material Iconsを非表示 */
+.nav-close-btn .material-icons {
+  display: none;
 }
 
 .side-nav-menu {
@@ -1020,12 +1326,39 @@ input::placeholder {
   font-family: "Kosugi Maru", sans-serif;
   font-weight: 400;
   border-left: 4px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+/* メニュー項目の順次表示アニメーション */
+.side-nav.active .side-nav-item {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.side-nav.active .side-nav-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.side-nav.active .side-nav-item:nth-child(2) {
+  transition-delay: 0.15s;
+}
+.side-nav.active .side-nav-item:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.side-nav.active .side-nav-item:nth-child(4) {
+  transition-delay: 0.25s;
+}
+.side-nav.active .side-nav-item:nth-child(5) {
+  transition-delay: 0.3s;
+}
+.side-nav.active .side-nav-item:nth-child(6) {
+  transition-delay: 0.35s;
 }
 
 .side-nav-item:hover,
 .side-nav-item.active {
-  background: #e8ddf8;
+  background: #c6bcf8;
   border-left-color: #c6bcf8;
   color: #343a40;
 }
@@ -1057,30 +1390,68 @@ input::placeholder {
 
 /* Menu Toggle Button */
 .menu-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: #c6bcf8;
+  background: #fff;
   border: 2px solid #343a40;
   border-radius: 12px;
   width: 48px;
   height: 48px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   color: #343a40;
   cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 1001;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
 }
 
 .menu-toggle:hover {
-  background: #b8a9f5;
+  background: #f8f9fa;
   transform: scale(1.05);
 }
 
+/* ハンバーガー線の作成 */
+.menu-toggle::before,
+.menu-toggle::after,
+.menu-toggle .hamburger-line {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background: #343a40;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border-radius: 2px;
+}
+
+.menu-toggle::before {
+  transform: translateY(-6px);
+}
+
+.menu-toggle::after {
+  transform: translateY(6px);
+}
+
+.menu-toggle .hamburger-line {
+  transform: translateY(0);
+}
+
+/* アクティブ状態（×に変形） */
+.menu-toggle.active::before {
+  transform: rotate(45deg) translateY(0);
+}
+
+.menu-toggle.active::after {
+  transform: rotate(-45deg) translateY(0);
+}
+
+.menu-toggle.active .hamburger-line {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Material Iconsを非表示 */
 .menu-toggle .material-icons {
-  font-size: 24px;
+  display: none;
 }
 
 /* Overlay for mobile side menu */
@@ -1090,11 +1461,13 @@ input::placeholder {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .nav-overlay.active {
@@ -1104,11 +1477,11 @@ input::placeholder {
 
 /* Adjust main content when side nav is open */
 .main-content {
-  transition: margin-left 0.3s ease;
+  transition: margin-right 0.3s ease;
 }
 
 .main-content.shifted {
-  margin-left: 280px;
+  margin-right: 280px;
 }
 
 /* Admin placeholder styles */
@@ -1325,7 +1698,7 @@ input::placeholder {
 }
 
 .template-tag {
-  background: #e8ddf8;
+  background: #c6bcf8;
   color: #343a40;
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
@@ -1354,7 +1727,7 @@ input::placeholder {
   color: #343a40;
   margin: 1.5rem 0 1rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #e8ddf8;
+  border-bottom: 2px solid #c6bcf8;
 }
 
 .modal-body h3:first-child {
@@ -1468,16 +1841,6 @@ input::placeholder {
 
 /* Responsive design */
 @media (min-width: 768px) {
-  /* Hide global bottom navigation on desktop */
-  .global-nav {
-    display: none;
-  }
-
-  /* Show side navigation menu toggle button */
-  .menu-toggle {
-    display: flex;
-  }
-
   .container {
     max-width: 600px;
   }
@@ -1506,26 +1869,6 @@ input::placeholder {
     min-width: 120px;
   }
 }
-
-/* Mobile specific styles */
-@media (max-width: 767px) {
-  /* Show global bottom navigation on mobile */
-  .global-nav {
-    display: flex;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-  }
-
-  /* Hide menu toggle button on mobile */
-  .menu-toggle {
-    display: none !important;
-  }
-
-  /* Hide side navigation on mobile */
-  .side-nav {
-    display: none;
-  }
-
 
 @media (min-width: 1024px) {
   .container {
