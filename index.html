@@ -172,31 +172,15 @@
       </div>
     </div>
 
-    <!-- Floating Menu -->
-    <div class="fab-menu" id="fabMenu">
-      <div class="fab-backdrop" onclick="toggleFabMenu()"></div>
-      <div class="fab-options">
-        <a href="create-survey.html" class="fab-option">
-          <span class="material-icons">quiz</span>
-          <span class="fab-label">アンケート作成</span>
-        </a>
-        <a href="create-live.html" class="fab-option">
-          <span class="material-icons">event</span>
-          <span class="fab-label">ライブ作成</span>
-        </a>
-      </div>
-      <button class="fab" onclick="toggleFabMenu()">
-        <span class="material-icons">add</span>
-      </button>
-    </div>
+    <!-- Floating Button -->
+    <a href="create-live.html" class="fab">
+      <span class="material-icons">add</span>
+    </a>
 
     <script src="script.js"></script>
     <script src="navigation.js"></script>
     <script>
-      function toggleFabMenu() {
-        const fabMenu = document.getElementById("fabMenu");
-        fabMenu.classList.toggle("open");
-      }
+      // FABメニューは不要になりました
     </script>
   </body>
 </html>
