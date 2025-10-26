@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理ダッシュボード - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/build/css/style.css}">
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="l-appHeader">
+      <button class="c-backBtn" data-action="back">
+        <span class="material-icons">home</span>
+      </button>
+      <div class="l-headerActions">
+        <button class="c-menuToggle">
+          <div class="c-hamburgerLine"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="l-sideNav" id="sideNav">
+      <div class="l-sideNavHeader">
+        <div class="l-navHeaderContent">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="l-navCloseBtn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="l-sideNavMenu">
+        <a th:href="@{/}" class="l-sideNavItem">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a th:href="@{/account}" class="l-sideNavItem">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a th:href="@{/live-detail}" class="l-sideNavItem">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a th:href="@{/results}" class="l-sideNavItem">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a th:href="@{/settings}" class="l-sideNavItem">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="l-sideNavItem" data-action="handle-logout">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="l-navOverlay" id="navOverlay"></div>
+
+    <div class="l-app">
+      <div class="l-container l-mainContent" id="mainContent">
+        <div class="l-header">
+          <h1>管理ダッシュボード</h1>
+        </div>
+        <div class="u-adminPlaceholder">
+          <div class="u-placeholderContent">
+            <h2>管理機能</h2>
+            <p>将来の管理機能がここに表示されます</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新規ライブ作成モーダル -->
+    <div class="c-modal" id="createLiveModal">
+      <div class="c-modalContent">
+        <div class="c-modalHeader">
+          <h2>新しいライブを作成</h2>
+          <button class="c-closeBtn" data-action="close-modal">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <form id="createLiveForm">
+          <div class="form-group">
+            <label>ライブ名</label>
+            <input type="text" id="liveName" placeholder="例：第10回お笑いライブ" required />
+          </div>
+          <div class="form-group">
+            <label>開催日時</label>
+            <input type="datetime-local" id="liveDate" required />
+          </div>
+          <div class="form-group">
+            <label>会場名</label>
+            <input type="text" id="venue" placeholder="例：〇〇ホール" />
+          </div>
+          <div class="c-modalActions">
+            <button type="button" class="btn-secondary" data-action="close-modal">キャンセル</button>
+            <button type="submit" class="btn-primary">作成</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Floating Menu -->
+    <div class="fab-menu" id="fabMenu">
+      <div class="fab-backdrop" data-action="toggle-fab-menu"></div>
+      <div class="fab-options">
+        <a th:href="@{/create-survey}" class="fab-option">
+          <span class="material-icons">quiz</span>
+          <span class="fab-label">アンケート作成</span>
+        </a>
+        <a th:href="@{/create-live}" class="fab-option">
+          <span class="material-icons">event</span>
+          <span class="fab-label">ライブ作成</span>
+        </a>
+      </div>
+      <button class="fab" data-action="toggle-fab-menu">
+        <span class="material-icons">add</span>
+      </button>
+    </div>
+
+    <script type="module" th:src="@{/build/js/index.js}"></script>
+    <script type="module" th:src="@{/build/js/navigation.js}"></script>
+    <script>
+      function toggleFabMenu() {
+        const fabMenu = document.getElementById('fabMenu');
+        fabMenu.classList.toggle('open');
+      }
+    </script>
+  </body>
+</html>

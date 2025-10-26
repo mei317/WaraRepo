@@ -1,0 +1,457 @@
+@use "../..//foundation/index" as *;
+
+// =================== BUTTONS ===================
+.c-backBtn,
+.c-settingsBtn,
+.c-logoutBtn {
+  background: $color-background;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-lg;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-dark-light;
+  cursor: pointer;
+  transition: $transition-fast;
+}
+
+.c-backBtn {
+  background: $color-primary;
+  color: $color-dark;
+  border-radius: $border-radius-lg;
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: $color-primary-hover;
+    border-color: $color-dark-light;
+    transform: scale(1.05);
+  }
+}
+
+.c-settingsBtn,
+.c-logoutBtn {
+  border-radius: $border-radius-round;
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: $color-background-light;
+    border-color: $color-dark-light;
+    transform: scale(1.05);
+  }
+}
+
+.c-logoutBtn {
+  font-size: 0.8rem;
+  width: auto;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 18px;
+}
+
+// =================== BUTTON STYLES ===================
+.c-btnPrimary,
+.c-btnSecondary,
+.c-btnSocial,
+.c-btnLink,
+.c-btnSmall,
+.c-btnSkyblue,
+.c-btnGreen {
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: 1.125rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-family: $font-primary;
+  cursor: pointer;
+  transition: $transition-default;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-height: 48px;
+}
+
+.c-btnPrimary {
+  background: $color-primary;
+  color: $color-dark;
+  border-color: $color-border;
+  padding: 1.125rem $spacing-md;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(198, 188, 248, 0.5);
+    border-color: $color-dark-light;
+    background: $color-primary-hover;
+  }
+
+  &:disabled {
+    background: $color-background-border;
+    color: $color-text-muted;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.c-btnSecondary {
+  background: $color-background-light;
+  color: $color-dark-light;
+  border: $border-width solid $color-border;
+
+  &:hover {
+    background: $color-background-border;
+    transform: translateY(-2px);
+    border-color: $color-dark-light;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .material-icons {
+    font-size: 20px;
+    margin-right: $spacing-sm;
+    vertical-align: middle;
+  }
+}
+
+.c-btnSecondaryPurple {
+  background: $color-skyblue;
+  color: $color-dark;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: 1.125rem $spacing-md;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-family: $font-primary;
+  cursor: pointer;
+  transition: $transition-default;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-height: 48px;
+  flex: 1;
+
+  &:hover {
+    background: $color-skyblue-hover;
+    border-color: $color-dark-light;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(214, 242, 254, 0.4);
+  }
+}
+
+.c-btnGreen {
+  background: $color-secondary;
+  color: $color-dark;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: 1.125rem $spacing-md;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-family: $font-primary;
+  cursor: pointer;
+  transition: $transition-default;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  min-height: 48px;
+  flex: 1;
+
+  &:hover {
+    background: $color-secondary-hover;
+    border-color: $color-dark-light;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(125, 231, 215, 0.4);
+  }
+}
+
+.c-btnSkyblue {
+  background: $color-skyblue;
+  color: $color-dark;
+  border-color: $color-border;
+  padding: 1.125rem $spacing-md;
+}
+
+.c-btnSmall {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  border-radius: $border-radius-sm;
+
+  &.c-btnSecondaryPurple {
+    background: $color-skyblue;
+    color: $color-dark;
+
+    &:hover {
+      background: $color-skyblue-hover;
+      border-color: $color-dark-light;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(214, 242, 254, 0.4);
+    }
+  }
+
+  &.c-btnGreen {
+    background: $color-secondary;
+    color: $color-dark;
+
+    &:hover {
+      background: $color-secondary-hover;
+      border-color: $color-dark-light;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(125, 231, 215, 0.4);
+    }
+  }
+
+  &.danger {
+    background: $color-orange;
+    color: $color-dark;
+    border: $border-width solid $color-border;
+
+    &:hover {
+      background: $color-orange-hover;
+      border-color: $color-dark-light;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 228, 199, 0.4);
+    }
+  }
+
+  .material-icons {
+    font-size: 16px;
+  }
+}
+
+// =================== SOCIAL BUTTONS ===================
+.c-btnSocial {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-bottom: $spacing-md;
+  padding: 1.25rem $spacing-lg;
+  min-height: 56px;
+
+  .material-icons {
+    font-size: 20px;
+    margin-right: $spacing-sm;
+    vertical-align: middle;
+  }
+
+  &.google {
+    background: $color-orange;
+    color: $color-dark;
+    border-color: $color-border;
+    font-family: $font-english;
+    font-weight: 500;
+
+    &:hover {
+      background: $color-orange-hover;
+      border-color: $color-dark-light;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 228, 199, 0.5);
+    }
+  }
+
+  &.facebook {
+    background: #7ee7d6;
+    color: $color-dark;
+    border-color: $color-border;
+    font-family: $font-english;
+    font-weight: 500;
+
+    &:hover {
+      background: #6bddc9;
+      border-color: $color-dark-light;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(126, 231, 214, 0.5);
+    }
+  }
+}
+
+.p-loginPage .c-btnSocial {
+  padding: $spacing-md $spacing-lg;
+  min-height: 48px;
+  margin-bottom: 0.8rem;
+}
+
+.c-btnLink {
+  background: none;
+  color: $color-primary;
+  padding: 0;
+  border: none;
+  text-decoration: underline;
+  font-family: "Kosugi Maru", sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $color-primary-hover;
+    text-decoration: none;
+  }
+}
+
+.c-closeBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: $color-text-muted;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-round;
+  transition: $transition-fast;
+
+  .material-icons {
+    font-size: 24px;
+  }
+
+  &:hover {
+    background: $color-background-light;
+  }
+}
+
+// =================== FLOATING ACTION BUTTON ===================
+.c-fabMenu {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+
+  &.open {
+    .c-fabBackdrop {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .c-fabOptions {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    .c-fab .material-icons {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.c-fabBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: $transition-default;
+  z-index: -1;
+}
+
+.c-fabOptions {
+  position: absolute;
+  bottom: 72px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.c-fabOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fff;
+  border: $border-width solid $color-border;
+  border-radius: 28px;
+  color: $color-dark;
+  text-decoration: none;
+  transition: $transition-default;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  min-width: 160px;
+
+  .material-icons {
+    font-size: 20px;
+  }
+
+  &:hover {
+    background: $color-background-light;
+    transform: translateX(-4px);
+  }
+
+  &.active {
+    background: $color-primary;
+    color: $color-dark;
+  }
+}
+
+.c-fabLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: "Kosugi Maru", sans-serif;
+}
+
+.c-fab {
+  width: 56px;
+  height: 56px;
+  background: $color-orange;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-round;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-dark;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 16px rgba(255, 228, 199, 0.4);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  text-decoration: none;
+
+  .material-icons {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(255, 228, 199, 0.6);
+    background: #ffd5a3;
+  }
+
+  &.extended {
+    width: auto;
+    padding: 0 16px;
+    border-radius: 28px;
+    gap: 8px;
+
+    .c-fabText {
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: "Kosugi Maru", sans-serif;
+      white-space: nowrap;
+    }
+  }
+}
+
+.c-actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}

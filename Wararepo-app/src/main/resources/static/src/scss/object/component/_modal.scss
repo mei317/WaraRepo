@@ -1,0 +1,75 @@
+@use "../..//foundation/index" as *;
+
+// =================== MODAL ===================
+.c-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &.show {
+    display: flex;
+  }
+
+  .c-modalContent {
+    background: $color-background;
+    border-radius: $border-radius-xl;
+    border: $border-width solid $color-border;
+    width: 100%;
+    max-width: $max-width-container;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+    &:has(.c-modalBody) {
+      max-width: 900px;
+    }
+  }
+
+  form {
+    padding: $spacing-lg;
+  }
+}
+
+.c-modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-lg $spacing-lg $spacing-md;
+  border-bottom: 1px solid $color-background-border;
+}
+
+.c-modalBody {
+  padding: $spacing-lg;
+  max-height: 70vh;
+  overflow-y: auto;
+
+  h3 {
+    color: $color-dark;
+    margin: $spacing-lg 0 $spacing-md 0;
+    padding-bottom: $spacing-sm;
+    border-bottom: $border-width solid $color-primary;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.c-modalActions {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+
+  .c-btnSecondary,
+  .c-btnPrimary {
+    flex: 1;
+  }
+}

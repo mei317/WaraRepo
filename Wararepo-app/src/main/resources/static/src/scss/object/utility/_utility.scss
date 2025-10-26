@@ -1,0 +1,42 @@
+@use "../..//foundation/index" as *;
+
+// =================== UTILITY CLASSES ===================
+
+.u-fullWidth {
+  width: 100%;
+}
+
+.u-halfWidth {
+  flex: 1;
+}
+
+.u-englishText {
+  font-family: $font-english;
+  font-weight: 500;
+  margin-right: -0.1rem;
+}
+
+// =================== ADMIN PLACEHOLDER ===================
+.u-adminPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.u-placeholderContent {
+  background: $color-background-light;
+  border-radius: $border-radius-lg;
+  padding: 3rem $spacing-xl;
+  border: $border-width solid $color-background-border;
+
+  h2 {
+    color: $color-dark-light;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: $color-text-muted;
+  }
+}

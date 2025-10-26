@@ -1,0 +1,14 @@
+package com.example.Wararepo_app.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class LiveDetailController {
+
+    @GetMapping("/live-detail")
+    public String liveDetail(Model model) {
+        return "live-detail";
+    }
+}

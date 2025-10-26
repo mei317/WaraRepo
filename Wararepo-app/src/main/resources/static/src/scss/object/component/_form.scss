@@ -1,0 +1,165 @@
+@use "../..//foundation/index" as *;
+
+// =================== FORM ELEMENTS ===================
+.c-formGroup {
+  margin-bottom: $spacing-md;
+  position: relative;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    font-weight: 500;
+    color: $color-dark-light;
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="datetime-local"],
+textarea,
+select {
+  width: 100%;
+  padding: 1.125rem $spacing-md;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-lg;
+  font-size: 0.9rem;
+  font-family: "Kosugi Maru", sans-serif;
+  font-weight: 400;
+  background: $color-background;
+  transition: $transition-default;
+  min-height: 48px;
+
+  &:focus {
+    outline: none;
+    border-color: $color-dark-light;
+    border-width: $border-width;
+    box-shadow: 0 0 0 4px rgba(73, 80, 87, 0.15);
+    transform: translateY(-1px);
+  }
+
+  &::placeholder {
+    font-family: $font-primary;
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.c-inputIcon {
+  position: absolute;
+  right: $spacing-md;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-dark;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+// =================== LOGIN FORM ===================
+.c-loginForm {
+  margin-bottom: $spacing-md;
+}
+
+.p-loginPage {
+  .l-app {
+    padding: 20px;
+    padding-top: 120px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .l-container {
+    max-width: $max-width-container;
+    width: 100%;
+    margin: 0;
+  }
+
+  .l-header {
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
+
+  .c-loginForm {
+    margin-bottom: $spacing-md;
+  }
+
+  .c-signupLink {
+    margin-top: $spacing-md;
+  }
+
+  .c-divider {
+    margin: 0.8rem 0;
+  }
+}
+
+.c-divider {
+  text-align: center;
+  margin: $spacing-md 0;
+  position: relative;
+  color: $color-text-muted;
+  font-size: 0.8rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: $border-width;
+    background: $color-border;
+    z-index: -1;
+  }
+
+  span {
+    background: $color-background;
+    padding: 0 $spacing-md;
+  }
+}
+
+.c-signupLink {
+  text-align: center;
+  margin-top: $spacing-xl;
+}
+
+// =================== SEARCH BOX ===================
+.c-searchBox {
+  position: relative;
+  margin-bottom: $spacing-md;
+
+  .material-icons {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-text-muted;
+    font-size: 20px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 12px 12px 44px;
+    border: $border-width solid $color-background-border;
+    border-radius: $border-radius-sm;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background: $color-background;
+
+    &:focus {
+      outline: none;
+      border-color: $color-skyblue-hover;
+      box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.1);
+    }
+  }
+}
+
+.c-charCount {
+  text-align: right;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  margin-top: $spacing-sm;
+}

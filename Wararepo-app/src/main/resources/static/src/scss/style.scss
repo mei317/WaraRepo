@@ -1,0 +1,35 @@
+// ==========================================
+// Wararepo Application Styles
+// FLOCSS Architecture
+// ==========================================
+
+// =================== FOUNDATION ===================
+// 基礎設定: リセット、変数、ミックスイン
+@use 'foundation/index';
+
+// =================== LAYOUT ===================
+// ページ全体のレイアウト要素
+@use 'layout/header';
+@use 'layout/navigation';
+@use 'layout/container';
+
+// =================== OBJECT ===================
+
+// ----- Component -----
+// 再利用可能なコンポーネント
+@use 'object/component/button';
+@use 'object/component/card';
+@use 'object/component/form';
+@use 'object/component/modal';
+@use 'object/component/tab';
+
+// ----- Project -----
+// プロジェクト固有のパターン
+@use 'object/project/live';
+@use 'object/project/performer';
+@use 'object/project/survey';
+@use 'object/project/result';
+
+// ----- Utility -----
+// 汎用クラス
+@use 'object/utility/utility';

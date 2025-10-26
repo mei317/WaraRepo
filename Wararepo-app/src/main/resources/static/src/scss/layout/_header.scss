@@ -1,0 +1,111 @@
+@use "../foundation/index" as *;
+
+// =================== APP HEADER ===================
+.l-appHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  background: $color-background;
+  border-bottom: $border-width solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .l-logo {
+    font-size: 1.5rem;
+    color: $color-dark;
+    font-family: "Kosugi Maru", sans-serif;
+    text-decoration: none;
+  }
+
+  .l-headerActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .l-pageTitle {
+    font-size: 1.2rem;
+    color: $color-dark;
+    font-family: "Kosugi Maru", sans-serif;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+  }
+}
+
+// =================== PAGE HEADER ===================
+.l-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-lg;
+  padding: 0 $spacing-sm;
+
+  &.l-resetFlex {
+    display: block;
+  }
+}
+
+.l-headerTop {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $spacing-md;
+}
+
+.l-headerRight {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+// =================== LOGO HEADER ===================
+.l-logoHeader {
+  text-align: left;
+  margin: 0;
+  padding: 8px 16px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  z-index: 999;
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: $border-width solid $color-border;
+
+  &.show {
+    transform: translateY(0);
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: $color-dark;
+    margin: 0;
+  }
+
+  p {
+    display: none;
+  }
+}
+
+.l-logo {
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    color: $color-dark-light;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.l-welcomeMessage {
+  margin-bottom: $spacing-md;
+}

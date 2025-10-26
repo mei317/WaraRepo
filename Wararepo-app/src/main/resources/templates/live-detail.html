@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ライブ詳細管理 - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/build/css/style.css}">
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="l-appHeader">
+      <button class="c-backBtn" data-action="back">
+        <span class="material-icons">home</span>
+      </button>
+      <div class="l-headerActions">
+        <button class="c-menuToggle" >
+          <div class="c-hamburgerLine"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="l-sideNav" id="sideNav">
+      <div class="l-sideNavHeader">
+        <div class="l-navHeaderContent">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="l-navCloseBtn" >
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="l-sideNavMenu">
+        <a th:href="@{/}" class="l-sideNavItem">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a th:href="@{/account}" class="l-sideNavItem">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a th:href="@{/live-detail}" class="side-nav-item active">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a th:href="@{/results}" class="l-sideNavItem">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a th:href="@{/settings}" class="l-sideNavItem">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="l-sideNavItem" data-action="handle-logout">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="l-navOverlay" id="navOverlay" ></div>
+
+    <div class="l-app">
+      <div class="l-container l-mainContent" id="mainContent">
+        <!-- 出演者管理コンテンツ -->
+          <div class="p-addPerformerSection">
+            <button class="btn-primary" data-action="show-add-performer-modal"><span class="material-icons">add</span> 芸人を追加</button>
+          </div>
+
+          <div class="p-performersList" id="performersList">
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">1</div>
+                <div class="p-performerDetails">
+                  <h3>ドドん</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="1">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="1" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">2</div>
+                <div class="p-performerDetails">
+                  <h3>ダンシングヒーロー</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="2">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="2" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">3</div>
+                <div class="p-performerDetails">
+                  <h3>笑太郎</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="3">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="3" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">4</div>
+                <div class="p-performerDetails">
+                  <h3>コメディ王</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="4">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="4" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">5</div>
+                <div class="p-performerDetails">
+                  <h3>お笑い兄弟</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="5">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="5" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">6</div>
+                <div class="p-performerDetails">
+                  <h3>ギャグマスター</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="6">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="6" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">7</div>
+                <div class="p-performerDetails">
+                  <h3>バラエティーズ</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="7">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="7" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+
+            <div class="p-performerCard">
+              <div class="p-performerInfo">
+                <div class="p-performerOrder">8</div>
+                <div class="p-performerDetails">
+                  <h3>ネタ職人</h3>
+                </div>
+              </div>
+              <div class="p-performerActions">
+                <button class="btn-small btn-secondary-purple" data-action="edit-performer" data-param="8">編集</button>
+                <button class="c-btnSmall" data-action="remove-performer" data-param="8" style="background: #343a40; color: #fefefe;">削除</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <h3>進行管理</h3>
+            <div class="control-buttons">
+              <button class="btn-secondary-purple" data-action="previous-performer"><span class="material-icons">skip_previous</span> 前の芸人</button>
+              <button class="btn-skyblue" data-action="next-performer">次の芸人 <span class="material-icons">skip_next</span></button>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- 芸人追加モーダル -->
+    <div class="c-modal" id="addPerformerModal">
+      <div class="c-modalContent">
+        <div class="c-modalHeader">
+          <h2>芸人を追加</h2>
+          <button class="c-closeBtn" data-action="close-modal">&times;</button>
+        </div>
+        <form id="addPerformerForm">
+          <div class="form-group">
+            <label>芸人名・コンビ名</label>
+            <input type="text" id="performerName" placeholder="例：お笑いコンビ名" required />
+          </div>
+          <div class="form-group">
+            <label>LINE ID</label>
+            <input type="text" id="performerLineId" placeholder="例：@comedy_duo" />
+          </div>
+          <div class="form-group">
+            <label>メールアドレス</label>
+            <input type="email" id="performerEmail" placeholder="例：comedy@example.com" />
+          </div>
+          <div class="c-modalActions">
+            <button type="button" class="btn-secondary" data-action="close-modal">キャンセル</button>
+            <button type="submit" class="btn-primary">追加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Floating Button -->
+    <a th:href="@{/create-live}" class="c-fab">
+      <span class="material-icons">add</span>
+    </a>
+
+    <script type="module" th:src="@{/build/js/index.js}"></script>
+    <script type="module" th:src="@{/build/js/navigation.js}"></script>
+    <script>
+      // FABメニューは不要になりました
+
+      function showAddPerformerModal() {
+        const modal = document.getElementById('addPerformerModal');
+        modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }
+
+      function editPerformer(id) {
+        alert(`芸人${id}の編集機能は未実装です`);
+      }
+
+      function removePerformer(id) {
+        if (confirm('この芸人を削除しますか？')) {
+          alert(`芸人${id}を削除しました`);
+        }
+      }
+
+      function previousPerformer() {
+        alert('前の芸人に戻る機能は未実装です');
+      }
+
+      function nextPerformer() {
+        alert('次の芸人に進む機能は未実装です');
+      }
+
+      // モーダル外クリックで閉じる
+      window.onclick = function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      }
+
+      // フォーム送信処理
+      document.getElementById('addPerformerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const performerName = document.getElementById('performerName').value;
+        const lineId = document.getElementById('performerLineId').value;
+        const email = document.getElementById('performerEmail').value;
+
+        if (performerName) {
+          alert(`${performerName}を追加しました`);
+          closeModal();
+          // フォームをリセット
+          document.getElementById('performerName').value = '';
+          document.getElementById('performerLineId').value = '';
+          document.getElementById('performerEmail').value = '';
+        }
+      });
+    </script>
+  </body>
+</html>

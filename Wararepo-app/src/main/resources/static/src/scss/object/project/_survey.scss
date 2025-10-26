@@ -1,0 +1,176 @@
+@use "../..//foundation/index" as *;
+
+// =================== STAR RATING ===================
+.p-starRating {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-sm;
+  margin: $spacing-md 0;
+}
+
+.p-star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: $transition-fast;
+  color: $color-border-light;
+  padding: $spacing-sm;
+  border-radius: $border-radius-round;
+
+  .material-icons {
+    font-size: 2rem;
+  }
+
+  &:hover,
+  &.active {
+    color: #ffc107;
+    transform: scale(1.1);
+  }
+}
+
+.p-ratingText {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: $spacing-lg;
+}
+
+// =================== COMMENT SECTION ===================
+.c-commentSection {
+  margin-bottom: 0;
+}
+
+// =================== SURVEY STATES ===================
+.p-surveySuccess,
+.p-surveyComplete,
+.p-alreadyRated {
+  text-align: center;
+  padding: $spacing-xl;
+}
+
+.p-successIcon,
+.p-completeIcon,
+.p-infoIcon {
+  margin-bottom: $spacing-md;
+  display: block;
+
+  .material-icons {
+    font-size: 4rem;
+  }
+}
+
+.p-successIcon .material-icons {
+  color: $color-success;
+}
+
+.p-completeIcon .material-icons {
+  color: #ffc107;
+}
+
+.p-infoIcon .material-icons {
+  color: $color-info;
+}
+
+// =================== SURVEY SUCCESS VIEW ===================
+.p-surveySuccessView {
+  text-align: center;
+  padding: $spacing-md 0;
+}
+
+.p-successHeader {
+  margin-bottom: $spacing-lg;
+
+  .p-successIcon {
+    margin-bottom: $spacing-md;
+
+    .material-icons {
+      font-size: 4rem;
+      color: $color-success;
+    }
+  }
+
+  h2 {
+    color: $color-dark;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.p-shareSection {
+  text-align: left;
+  margin-bottom: $spacing-xl;
+}
+
+.p-urlDisplay {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+
+  input {
+    flex: 1;
+    font-family: "Courier New", monospace;
+    font-size: 0.85rem;
+    background: $color-background-light;
+    border: $border-width solid $color-background-border;
+  }
+}
+
+.p-urlNote {
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  margin: 0;
+}
+
+.p-qrPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $spacing-md;
+
+  .material-icons {
+    font-size: 3rem;
+    color: $color-text-muted;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    margin: 0;
+    color: $color-dark;
+    font-weight: 500;
+  }
+
+  small {
+    color: $color-text-muted;
+    font-size: 0.7rem;
+    margin-top: $spacing-sm;
+    word-break: break-all;
+  }
+}
+
+.p-managementInfo {
+  background: $color-background-light;
+  border-radius: $border-radius-sm;
+  padding: $spacing-md;
+}
+
+.p-infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid $color-background-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.p-infoLabel {
+  font-weight: 500;
+  color: $color-dark-light;
+}
+
+.p-infoValue {
+  color: $color-dark;
+  font-weight: 600;
+}

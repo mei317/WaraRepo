@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ｗｗｗレポ - お笑いライブアンケートシステム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/build/css/style.css}">
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="l-appHeader">
+      <a th:href="@{/}" class="logo">ｗｗｗレポ</a>
+      <div class="l-headerActions">
+        <button class="c-menuToggle">
+          <div class="c-hamburgerLine"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="l-sideNav" id="sideNav">
+      <div class="l-sideNavHeader">
+        <div class="l-navHeaderContent">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="l-navCloseBtn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="sideNavMenu">
+        <a th:href="@{/}" class="l-sideNavItem active">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a th:href="@{/account}" class="l-sideNavItem">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a th:href="@{/live-detail}" class="l-sideNavItem">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a th:href="@{/results}" class="l-sideNavItem">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a th:href="@{/settings}" class="l-sideNavItem">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="l-sideNavItem" data-action="handle-logout">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="l-navOverlay" id="navOverlay"></div>
+
+    <div class="l-app">
+      <div class="l-container l-mainContent" id="mainContent">
+        <div class="l-logoHeader">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <div class="l-welcomeMessage">
+          <p>こんにちは、<span id="userName" th:text="${userName}">主催者</span>さん！</p>
+        </div>
+
+        <div class="p-livesSection">
+          <h2>ライブ一覧</h2>
+          <div class="p-livesList" id="livesList">
+            <div class="p-liveCard active">
+              <div class="p-liveHeader">
+                <h3>小猿ライブ！</h3>
+                <div class="p-liveStatus active">進行中</div>
+              </div>
+              <div class="p-liveInfo">
+                <p><span class="material-icons">event</span> 2024年3月15日 19:00</p>
+                <p><span class="material-icons">theater_comedy</span> 5組の芸人が参加</p>
+                <p><span class="material-icons">analytics</span> 23件の回答</p>
+              </div>
+              <div class="p-liveActions">
+                <button class="c-btnSkyblue u-fullWidth" data-action="go-to-results" data-param="sample">集計結果を見る</button>
+              </div>
+            </div>
+
+            <div class="p-liveCard">
+              <div class="p-liveHeader">
+                <h3>肉食ライブ！</h3>
+                <div class="p-liveStatus completed">終了</div>
+              </div>
+              <div class="p-liveInfo">
+                <p><span class="material-icons">event</span> 2024年3月10日 18:00</p>
+                <p><span class="material-icons">theater_comedy</span> 3組の芸人が参加</p>
+                <p><span class="material-icons">analytics</span> 45件の回答</p>
+              </div>
+              <div class="p-liveActions">
+                <button class="c-btnSkyblue u-fullWidth" data-action="go-to-results" data-param="past">集計結果を見る</button>
+              </div>
+            </div>
+
+            <div class="p-liveCard">
+              <div class="p-liveHeader">
+                <h3>疾風迅雷舞！</h3>
+                <div class="p-liveStatus completed">終了</div>
+              </div>
+              <div class="p-liveInfo">
+                <p><span class="material-icons">event</span> 2024年3月10日 18:00</p>
+                <p><span class="material-icons">theater_comedy</span> 3組の芸人が参加</p>
+                <p><span class="material-icons">analytics</span> 45件の回答</p>
+              </div>
+              <div class="p-liveActions">
+                <button class="c-btnSkyblue u-fullWidth" data-action="go-to-results" data-param="past">集計結果を見る</button>
+              </div>
+            </div>
+
+            <div class="p-liveCard">
+              <div class="p-liveHeader">
+                <h3>大首領大猿ライブ！</h3>
+                <div class="p-liveStatus completed">終了</div>
+              </div>
+              <div class="p-liveInfo">
+                <p><span class="material-icons">event</span> 2024年3月10日 18:00</p>
+                <p><span class="material-icons">theater_comedy</span> 3組の芸人が参加</p>
+                <p><span class="material-icons">analytics</span> 45件の回答</p>
+              </div>
+              <div class="p-liveActions">
+                <button class="c-btnSkyblue u-fullWidth" data-action="go-to-results" data-param="past">集計結果を見る</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新規ライブ作成モーダル -->
+    <div class="c-modal" id="createLiveModal">
+      <div class="c-modalContent">
+        <div class="c-modal-header">
+          <h2>新しいライブを作成</h2>
+          <button class="c-close-btn" data-action="close-modal">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <form id="createLiveForm">
+          <div class="c-form-group">
+            <label>ライブ名</label>
+            <input type="text" id="liveName" placeholder="例：第10回お笑いライブ" required />
+          </div>
+          <div class="c-form-group">
+            <label>開催日時</label>
+            <input type="datetime-local" id="liveDate" required />
+          </div>
+          <div class="c-form-group">
+            <label>会場名</label>
+            <input type="text" id="venue" placeholder="例：〇〇ホール" />
+          </div>
+          <div class="c-modalActions">
+            <button type="button" class="c-btnSecondary" data-action="close-modal">キャンセル</button>
+            <button type="submit" class="c-btnPrimary">作成</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer>
+
+    </footer>
+
+    <!-- Floating Button -->
+    <a th:href="@{/create-live}" class="fab">
+      <span class="material-icons">add</span>
+    </a>
+
+    <script type="module" th:src="@{/build/js/index.js}"></script>
+    <script type="module" th:src="@{/build/js/navigation.js}"></script>
+  </body>
+</html>

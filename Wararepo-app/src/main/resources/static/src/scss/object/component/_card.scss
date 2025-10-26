@@ -1,0 +1,202 @@
+@use "../..//foundation/index" as *;
+
+// =================== CARDS ===================
+.c-welcomeCard,
+.c-liveInfoCard,
+.p-liveCard,
+.p-performerCard,
+.p-resultCard {
+  background: $color-background;
+  border-radius: $border-radius-xl;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: $border-width solid $color-border;
+  transition: $transition-default;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: $color-dark-light;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.p-resultCard {
+  padding: 0;
+}
+
+.p-resultContent {
+  padding: $spacing-md;
+}
+
+.p-resultFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.c-commentSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: $transition-default;
+
+  &:hover {
+    transform: scale(1.05);
+
+    .c-commentIcon,
+    .c-commentLabel {
+      color: $color-secondary-hover;
+    }
+  }
+}
+
+.c-commentIcon {
+  color: $color-secondary;
+  transition: color 0.3s ease;
+}
+
+.c-commentLabel {
+  color: $color-secondary;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+// =================== STATS CARD ===================
+.c-statsOverview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.c-statCard {
+  background: $color-background;
+  border-radius: $border-radius-md;
+  text-align: center;
+  border: $border-width solid $color-border;
+}
+
+.c-statNumber {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-dark;
+  margin-bottom: 0.25rem;
+  border-bottom: 0.13rem dashed $color-border;
+  padding: $spacing-sm;
+}
+
+.c-statLabel {
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  padding: $spacing-sm;
+}
+
+// =================== TEMPLATE CARD ===================
+.c-templateCurrent {
+  background: $color-background-light;
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  border: $border-width solid #e8ddf8;
+
+  h4 {
+    color: $color-dark;
+    margin-bottom: $spacing-sm;
+    font-size: 0.9rem;
+  }
+
+  .c-templateInfo strong {
+    color: $color-primary;
+    font-size: 1rem;
+  }
+}
+
+.c-templateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-md;
+  margin: $spacing-md 0;
+}
+
+.c-templateCard {
+  background: $color-background;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  transition: $transition-default;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: $color-primary;
+    box-shadow: 0 6px 20px rgba(198, 188, 248, 0.3);
+  }
+
+  p {
+    color: $color-text-muted;
+    font-size: 0.85rem;
+    margin-bottom: $spacing-md;
+    line-height: 1.4;
+  }
+}
+
+.c-templateCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-sm;
+
+  h4 {
+    color: $color-dark;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.c-templateType {
+  background: $color-primary;
+  color: $color-dark;
+  padding: 0.25rem $spacing-sm;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: $spacing-sm;
+}
+
+.c-templateSettings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin: $spacing-md 0;
+}
+
+.c-templateTag {
+  background: $color-primary;
+  color: $color-dark;
+  padding: 0.25rem $spacing-sm;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.c-templateActions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+}
+
+// =================== RESPONSIVE ===================
+@media (min-width: 768px) {
+  .c-statsOverview {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .c-statsOverview {
+    max-width: 600px;
+    margin: 0 auto $spacing-lg;
+  }
+}

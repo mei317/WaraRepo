@@ -1,0 +1,34 @@
+@use "../foundation/index" as *;
+
+// =================== CONTAINER ===================
+.l-container {
+  width: 100%;
+  max-width: $max-width-container;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.l-mainContent {
+  transition: margin-right 0.3s ease;
+
+  &.shifted {
+    margin-right: 280px;
+  }
+}
+
+// =================== RESPONSIVE DESIGN ===================
+@media (min-width: 768px) {
+  .l-container {
+    max-width: 600px;
+  }
+
+  .l-app {
+    padding: 40px 40px 20px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .l-container {
+    max-width: 800px;
+  }
+}

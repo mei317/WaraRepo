@@ -1,0 +1,234 @@
+@use "../foundation/index" as *;
+
+// =================== NAVIGATION MENUS ===================
+/* Side Navigation (PC) */
+.l-sideNav {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100vh;
+  background: $color-background;
+  border-left: $border-width solid $color-border;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow-y: auto;
+  transform: scale(0.95);
+
+  &.active {
+    right: 0;
+    transform: scale(1);
+
+    .l-sideNavItem {
+      transform: translateX(0);
+      opacity: 1;
+
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          transition-delay: #{0.05 + $i * 0.05}s;
+        }
+      }
+    }
+  }
+}
+
+.l-sideNavHeader {
+  padding: 12px 16px $spacing-md $spacing-lg;
+  border-bottom: $border-width solid $color-primary;
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    color: $color-dark;
+    font-size: 1.5rem;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $color-text-muted;
+    font-size: 0.8rem;
+  }
+}
+
+.l-navHeaderContent {
+  flex: 1;
+}
+
+.l-navCloseBtn {
+  background: $color-dark;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-md;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: $transition-bounce;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  .material-icons {
+    display: none;
+  }
+
+  &:hover {
+    background: $color-dark-light;
+    transform: scale(1.05);
+  }
+}
+
+.l-sideNavMenu {
+  padding: $spacing-md 0;
+}
+
+.l-sideNavItem {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  text-decoration: none;
+  color: $color-dark-light;
+  font-family: "Kosugi Maru", sans-serif;
+  font-weight: 400;
+  border-left: 4px solid transparent;
+  transition: $transition-bounce;
+  transform: translateX(20px);
+  opacity: 0;
+
+  .material-icons {
+    font-size: 24px;
+    margin-right: $spacing-md;
+    color: $color-text-muted;
+  }
+
+  &:hover,
+  &.active {
+    background: $color-primary;
+    border-left-color: $color-primary;
+    color: $color-dark;
+
+    .material-icons {
+      color: $color-dark;
+    }
+  }
+}
+
+.l-sideNavSection {
+  margin-top: $spacing-lg;
+  padding: 0 $spacing-lg;
+}
+
+.l-sideNavSectionTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: $spacing-sm;
+}
+
+// =================== MENU TOGGLE BUTTON ===================
+.c-menuToggle {
+  background: #fff;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-md;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-dark;
+  cursor: pointer;
+  transition: $transition-bounce;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after,
+  .c-hamburgerLine {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: $color-dark;
+    transition: $transition-bounce;
+    border-radius: 2px;
+  }
+
+  &::before {
+    transform: translateY(-6px);
+  }
+
+  &::after {
+    transform: translateY(6px);
+  }
+
+  .c-hamburgerLine {
+    transform: translateY(0);
+  }
+
+  &.active {
+    &::before {
+      transform: rotate(45deg) translateY(0);
+    }
+
+    &::after {
+      transform: rotate(-45deg) translateY(0);
+    }
+
+    .c-hamburgerLine {
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  .material-icons {
+    display: none;
+  }
+
+  &:hover {
+    background: $color-background-light;
+    transform: scale(1.05);
+  }
+}
+
+// =================== OVERLAY ===================
+.l-navOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: $transition-smooth;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

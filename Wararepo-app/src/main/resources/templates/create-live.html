@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ライブ作成 - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/build/css/style.css}">
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="l-appHeader">
+      <button class="c-backBtn" data-action="back">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h1 class="l-pageTitle">新規作成</h1>
+      <div class="l-headerActions">
+        <button class="c-menuToggle" >
+          <div class="c-hamburgerLine"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <nav class="l-sideNav" id="sideNav">
+      <div class="l-sideNavHeader">
+        <div class="l-navHeaderContent">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="l-navCloseBtn" >
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="l-sideNavMenu">
+        <a th:href="@{/}" class="l-sideNavItem">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a th:href="@{/account}" class="l-sideNavItem">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a th:href="@{/live-detail}" class="l-sideNavItem">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a th:href="@{/results}" class="l-sideNavItem">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a th:href="@{/settings}" class="l-sideNavItem">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="l-sideNavItem" data-action="handle-logout">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="l-navOverlay" id="navOverlay" ></div>
+
+    <div class="l-app">
+      <div class="l-container l-mainContent" id="mainContent">
+        <div class="l-logoHeader">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <!-- タブナビゲーション -->
+        <div class="c-tabNavigation">
+          <button class="c-tabButton active" data-tab="1" data-action="switch-tab" data-param="1">
+            ライブ作成
+          </button>
+          <button class="c-tabButton" data-tab="2" data-action="switch-tab" data-param="2">
+            出演者登録
+          </button>
+          <button class="c-tabButton" data-tab="3" data-action="switch-tab" data-param="3">
+            アンケート作成
+          </button>
+        </div>
+
+        <div class="l-header l-resetFlex">
+          <p id="stepDescription">ライブの基本情報を入力してください。</p>
+        </div>
+
+
+        <!-- ステップ1: ライブ作成 -->
+        <div class="c-stepContent" id="step1">
+          <div class="c-liveInfoCard">
+            <h3>基本情報</h3>
+            <div class="c-formGroup">
+              <label for="liveName">ライブ名</label>
+              <input type="text" id="liveName" placeholder="例：第10回お笑いライブ" required />
+            </div>
+            <div class="c-formGroup">
+              <label for="liveDate">開催日時</label>
+              <input type="datetime-local" id="liveDate" required />
+            </div>
+            <div class="c-formGroup">
+              <label for="venue">会場名</label>
+              <input type="text" id="venue" placeholder="例：〇〇ホール" />
+            </div>
+            <div class="c-formGroup">
+              <label for="description">ライブ説明</label>
+              <textarea id="description" placeholder="ライブの説明や注意事項を入力してください"></textarea>
+            </div>
+          </div>
+
+          <div class="c-liveInfoCard">
+            <h3>公開設定</h3>
+            <div class="c-formGroup">
+              <label>
+                <input type="radio" name="liveVisibility" value="public" checked />
+                パブリック（一般公開）
+              </label>
+            </div>
+            <div class="c-formGroup">
+              <label>
+                <input type="radio" name="liveVisibility" value="private" />
+                プライベート（招待制）
+              </label>
+            </div>
+          </div>
+
+          <div class="c-actionButtons">
+            <button class="btn-secondary full-width" data-action="save-live-draft">
+              <span class="material-icons">save</span>
+              下書き保存
+            </button>
+            <button class="btn-primary full-width" data-action="next-step">
+              出演者登録へ進む
+              <span class="material-icons">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ステップ2: 出演者登録 -->
+        <div class="c-stepContent" id="step2" style="display: none;">
+          <div class="c-liveInfoCard">
+            <h3>出演者を選択</h3>
+            <p>登録済みの芸人から選択するか、新しい芸人を追加してください。</p>
+
+            <div class="c-formGroup">
+              <button class="btn-secondary-purple full-width" data-action="show-add-performer-modal" style="margin-bottom: 1rem;">
+                <span class="material-icons">add</span>
+                新しい芸人を追加
+              </button>
+            </div>
+          </div>
+
+          <div class="p-performersSelection" id="performersSelection">
+            <div class="c-liveInfoCard">
+              <h3>登録済みの芸人一覧</h3>
+
+              <!-- 検索とフィルター -->
+              <div class="p-performersControls">
+                <div class="c-searchBox">
+                  <span class="material-icons">search</span>
+                  <input type="text" id="performerSearch" placeholder="芸人名で検索..." onkeyup="filterPerformers()" />
+                </div>
+                <div class="p-filterButtons">
+                  <button class="filter-btn active" data-action="filter-by-selection" data-param="all">全て (<span id="allCount">0</span>)</button>
+                  <button class="p-filterBtn" data-action="filter-by-selection" data-param="selected">選択済み (<span id="selectedFilterCount">0</span>)</button>
+                  <button class="p-filterBtn" data-action="filter-by-selection" data-param="unselected">未選択 (<span id="unselectedCount">0</span>)</button>
+                </div>
+              </div>
+
+              <div class="p-performersGrid" id="performersGrid">
+                <!-- 登録済み芸人がここに表示される -->
+              </div>
+            </div>
+
+            <div class="c-liveInfoCard">
+              <h3>選択された出演者 (<span id="selectedCount">0</span>組)</h3>
+              <div class="p-selectedPerformers" id="selectedPerformers">
+                <p class="p-emptyMessage">出演者が選択されていません</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="c-actionButtons">
+            <button class="btn-secondary full-width" data-action="prev-step">
+              <span class="material-icons">arrow_back</span>
+              ライブ情報へ戻る
+            </button>
+            <button class="btn-primary full-width" data-action="next-step">
+              アンケート作成へ進む
+              <span class="material-icons">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ステップ3: アンケート作成 -->
+        <div class="c-stepContent" id="step3" style="display: none;">
+          <div class="c-liveInfoCard">
+            <h3>アンケート質問</h3>
+            <div class="c-formGroup">
+              <label for="customQuestion1">カスタム質問1（任意）</label>
+              <input type="text" id="customQuestion1" placeholder="例：今日のパフォーマンスで最も印象に残ったのは？" />
+            </div>
+            <div class="c-formGroup">
+              <label for="customQuestion2">カスタム質問2（任意）</label>
+              <input type="text" id="customQuestion2" placeholder="例：また見たいと思いましたか？" />
+            </div>
+          </div>
+
+          <div class="c-liveInfoCard">
+            <h3>アンケート設定</h3>
+            <div class="c-formGroup">
+              <label>
+                <input type="checkbox" id="enableRating" checked />
+                評価機能を有効にする（5段階評価）
+              </label>
+            </div>
+            <div class="c-formGroup">
+              <label>
+                <input type="checkbox" id="enableComments" checked />
+                コメント機能を有効にする
+              </label>
+            </div>
+            <div class="c-formGroup">
+              <label>
+                <input type="checkbox" id="enableLiveChat" />
+                ライブチャット機能を有効にする
+              </label>
+            </div>
+          </div>
+
+          <div class="c-actionButtons">
+            <button class="btn-secondary full-width" data-action="prev-step">
+              <span class="material-icons">arrow_back</span>
+              出演者登録に戻る
+            </button>
+            <button class="btn-primary full-width" data-action="create-live">
+              <span class="material-icons">event</span>
+              ライブを作成して開始
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 芸人追加モーダル -->
+    <div class="c-modal" id="addPerformerModal">
+      <div class="c-modalContent">
+        <div class="c-modalHeader">
+          <h2>新しい芸人を追加</h2>
+          <button class="c-closeBtn" data-action="close-modal">&times;</button>
+        </div>
+        <form id="addPerformerForm">
+          <div class="c-formGroup">
+            <label>芸人名・コンビ名</label>
+            <input type="text" id="performerName" placeholder="例：お笑いコンビ名" required />
+          </div>
+          <div class="c-formGroup">
+            <label>LINE ID</label>
+            <input type="text" id="performerLineId" placeholder="例：@comedy_duo" />
+          </div>
+          <div class="c-formGroup">
+            <label>メールアドレス</label>
+            <input type="email" id="performerEmail" placeholder="例：comedy@example.com" />
+          </div>
+          <div class="c-modalActions">
+            <button type="button" class="c-btnSecondary" data-action="close-modal">キャンセル</button>
+            <button type="submit" class="c-btnPrimary">追加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" th:src="@{/build/js/index.js}"></script>
+    <script type="module" th:src="@{/build/js/navigation.js}"></script>
+    <script>
+      let currentStep = 1;
+      const totalSteps = 3;
+
+      // ステップタイトルと説明
+      const stepInfo = {
+        1: { title: '新しいライブを作成', description: 'ライブの基本情報を入力してください。' },
+        2: { title: '出演者を登録', description: '出演者の情報を入力してください。' },
+        3: { title: 'アンケートを設定', description: 'アンケートの設定を行ってください。' }
+      };
+
+      function updateTabIndicator() {
+        document.querySelectorAll('.tab-button').forEach((button, index) => {
+          const tab = index + 1;
+          if (tab === currentStep) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+
+        // 説明を更新
+        document.getElementById('stepDescription').textContent = stepInfo[currentStep].description;
+      }
+
+      function switchTab(tab) {
+        // 全てのタブコンテンツを非表示
+        document.querySelectorAll('.step-content').forEach(content => {
+          content.style.display = 'none';
+        });
+
+        // 指定されたタブを表示
+        document.getElementById(`step${tab}`).style.display = 'block';
+
+        currentStep = tab;
+        updateTabIndicator();
+      }
+
+      function showStep(step) {
+        switchTab(step);
+      }
+
+      function nextStep() {
+        if (currentStep === 1) {
+          // ステップ1の検証
+          const liveName = document.getElementById('liveName').value;
+          const liveDate = document.getElementById('liveDate').value;
+          if (!liveName || !liveDate) {
+            alert('ライブ名と開催日時を入力してください。');
+            return;
+          }
+        }
+
+        if (currentStep < totalSteps) {
+          switchTab(currentStep + 1);
+          if (currentStep === 2) {
+            generatePerformersGrid();
+          }
+        }
+      }
+
+      function prevStep() {
+        if (currentStep > 1) {
+          switchTab(currentStep - 1);
+        }
+      }
+
+      // 登録済み芸人のデータ
+      const availablePerformers = [
+        { id: 1, name: 'ドドん', lineId: '@dodon_comedy', email: 'dodon@comedy.com' },
+        { id: 2, name: 'ダンシングヒーロー', lineId: '@dancing_hero', email: 'hero@dance.com' },
+        { id: 3, name: '笑太郎', lineId: '@shotaro_laugh', email: 'shotaro@funny.com' },
+        { id: 4, name: 'コメディ王', lineId: '@comedy_king', email: 'king@comedy.com' },
+        { id: 5, name: 'お笑い兄弟', lineId: '@owarai_bros', email: 'bros@owarai.com' },
+        { id: 6, name: 'ギャグマスター', lineId: '@gag_master', email: 'master@gag.com' },
+        { id: 7, name: 'バラエティーズ', lineId: '@varieties', email: 'info@varieties.com' },
+        { id: 8, name: 'ネタ職人', lineId: '@neta_shokunin', email: 'shokunin@neta.com' },
+        { id: 9, name: 'サンダーボルト', lineId: '@thunder_bolt', email: 'thunder@bolt.com' },
+        { id: 10, name: 'ラフィングスター', lineId: '@laughing_star', email: 'star@laugh.com' },
+        { id: 11, name: 'ドリームチーム', lineId: '@dream_team', email: 'dream@team.com' },
+        { id: 12, name: 'ハッピーデイズ', lineId: '@happy_days', email: 'happy@days.com' },
+        { id: 13, name: 'ビッグスマイル', lineId: '@big_smile', email: 'big@smile.com' },
+        { id: 14, name: 'コメディクイーン', lineId: '@comedy_queen', email: 'queen@comedy.com' },
+        { id: 15, name: 'ジョークマシン', lineId: '@joke_machine', email: 'joke@machine.com' },
+        { id: 16, name: 'ファニーフェイス', lineId: '@funny_face', email: 'funny@face.com' },
+        { id: 17, name: 'スマイルメーカー', lineId: '@smile_maker', email: 'smile@maker.com' },
+        { id: 18, name: 'エンタメキング', lineId: '@entame_king', email: 'entame@king.com' },
+        { id: 19, name: 'トゥインクル', lineId: '@twinkle_duo', email: 'twinkle@duo.com' },
+        { id: 20, name: 'パワフルパンチ', lineId: '@powerful_punch', email: 'power@punch.com' }
+      ];
+
+      let selectedPerformers = [];
+      let currentFilter = 'all';
+
+      function generatePerformersGrid(performersToShow = availablePerformers) {
+        const grid = document.getElementById('performersGrid');
+        grid.innerHTML = '';
+
+        if (performersToShow.length === 0) {
+          grid.innerHTML = '<div class="p-emptyMessage">該当する芸人が見つかりません</div>';
+          return;
+        }
+
+        performersToShow.forEach(performer => {
+          const isSelected = selectedPerformers.some(p => p.id === performer.id);
+          const performerCard = document.createElement('div');
+          performerCard.className = `performer-select-card ${isSelected ? 'selected' : ''}`;
+          performerCard.onclick = () => togglePerformer(performer);
+          performerCard.innerHTML = `
+            <div class="p-performerSelectInfo">
+              <h4>${performer.name}</h4>
+            </div>
+            <div class="p-selectIndicator">
+              <span class="material-icons">${isSelected ? 'check_circle' : 'radio_button_unchecked'}</span>
+            </div>
+          `;
+          grid.appendChild(performerCard);
+        });
+
+        updateFilterCounts();
+      }
+
+      function filterPerformers() {
+        const searchTerm = document.getElementById('performerSearch').value.toLowerCase();
+        let filteredPerformers = availablePerformers.filter(performer =>
+          performer.name.toLowerCase().includes(searchTerm)
+        );
+
+        // 現在のフィルターを適用
+        if (currentFilter === 'selected') {
+          filteredPerformers = filteredPerformers.filter(performer =>
+            selectedPerformers.some(p => p.id === performer.id)
+          );
+        } else if (currentFilter === 'unselected') {
+          filteredPerformers = filteredPerformers.filter(performer =>
+            !selectedPerformers.some(p => p.id === performer.id)
+          );
+        }
+
+        generatePerformersGrid(filteredPerformers);
+      }
+
+      function filterBySelection(filterType) {
+        currentFilter = filterType;
+
+        // フィルターボタンのアクティブ状態を更新
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        filterPerformers();
+      }
+
+      function updateFilterCounts() {
+        const selectedCount = selectedPerformers.length;
+        const unselectedCount = availablePerformers.length - selectedCount;
+
+        document.getElementById('allCount').textContent = availablePerformers.length;
+        document.getElementById('selectedFilterCount').textContent = selectedCount;
+        document.getElementById('unselectedCount').textContent = unselectedCount;
+      }
+
+      function togglePerformer(performer) {
+        const index = selectedPerformers.findIndex(p => p.id === performer.id);
+        if (index > -1) {
+          selectedPerformers.splice(index, 1);
+        } else {
+          selectedPerformers.push(performer);
+        }
+        updateSelectedPerformers();
+        filterPerformers(); // フィルター機能を使用
+      }
+
+      function updateSelectedPerformers() {
+        const container = document.getElementById('selectedPerformers');
+        const countSpan = document.getElementById('selectedCount');
+
+        countSpan.textContent = selectedPerformers.length;
+
+        if (selectedPerformers.length === 0) {
+          container.innerHTML = '<p class="p-emptyMessage">出演者が選択されていません</p>';
+          return;
+        }
+
+        container.innerHTML = '';
+        selectedPerformers.forEach((performer, index) => {
+          const performerItem = document.createElement('div');
+          performerItem.className = 'selected-performer-item';
+          performerItem.innerHTML = `
+            <div class="p-selectedPerformerInfo">
+              <span class="p-performerOrder">${index + 1}</span>
+              <span class="p-performerName">${performer.name}</span>
+            </div>
+            <button class="c-btnSmall" data-action="remove-selected-performer" data-param="${performer.id}" style="background: #343a40; color: #fefefe;">
+              <span class="material-icons">close</span>
+            </button>
+          `;
+          container.appendChild(performerItem);
+        });
+      }
+
+      function removeSelectedPerformer(performerId) {
+        selectedPerformers = selectedPerformers.filter(p => p.id !== performerId);
+        updateSelectedPerformers();
+        filterPerformers(); // フィルター機能を使用
+      }
+
+      function saveLiveDraft() {
+        const liveName = document.getElementById('liveName').value;
+        if (!liveName) {
+          alert('ライブ名を入力してください。');
+          return;
+        }
+        alert('ライブの下書きを保存しました');
+      }
+
+      function createLive() {
+        const liveName = document.getElementById('liveName').value;
+        const liveDate = document.getElementById('liveDate').value;
+
+        if (!liveName || !liveDate) {
+          alert('ライブ名と開催日時を入力してください。');
+          return;
+        }
+
+        // ライブ作成処理をシミュレート
+        alert(`「${liveName}」を作成しました！\n\nライブが開始されました。出演者管理ページで進行を管理できます。`);
+
+        // 出演者管理ページに遷移
+        setTimeout(() => {
+          window.location.href = 'live-detail.html';
+        }, 1000);
+      }
+
+      function showAddPerformerModal() {
+        const modal = document.getElementById('addPerformerModal');
+        modal.style.display = 'flex';
+      }
+
+      function closeModal() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }
+
+      // モーダル外クリックで閉じる
+      window.onclick = function(event) {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+          if (event.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      }
+
+      // 芸人追加フォーム
+      document.getElementById('addPerformerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('performerName').value;
+        const lineId = document.getElementById('performerLineId').value;
+        const email = document.getElementById('performerEmail').value;
+
+        if (name) {
+          const newPerformer = {
+            id: availablePerformers.length + 1,
+            name: name,
+            lineId: lineId,
+            email: email
+          };
+          availablePerformers.push(newPerformer);
+          generatePerformersGrid();
+          closeModal();
+          // フォームリセット
+          document.getElementById('performerName').value = '';
+          document.getElementById('performerLineId').value = '';
+          document.getElementById('performerEmail').value = '';
+          alert(`${name}を追加しました`);
+        }
+      });
+
+      // 初期化
+      document.addEventListener('DOMContentLoaded', function() {
+        switchTab(1);
+      });
+    </script>
+  </body>
+</html>

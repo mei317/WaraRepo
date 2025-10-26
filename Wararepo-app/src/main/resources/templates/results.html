@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>集計結果 - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/build/css/style.css}">
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="l-appHeader">
+      <button class="c-backBtn" data-action="back">
+        <span class="material-icons">home</span>
+      </button>
+      <div class="l-headerActions">
+        <button class="c-menuToggle">
+          <div class="c-hamburgerLine"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <nav class="l-sideNav" id="sideNav">
+      <div class="l-sideNavHeader">
+        <div class="l-navHeaderContent">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="l-navCloseBtn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="l-sideNavMenu">
+        <a th:href="@{/}" class="l-sideNavItem">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a th:href="@{/account}" class="l-sideNavItem">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a th:href="@{/live-detail}" class="l-sideNavItem">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a th:href="@{/results}" class="l-sideNavItem active">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a th:href="@{/settings}" class="l-sideNavItem">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="l-sideNavItem" data-action="handle-logout">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="l-navOverlay" id="navOverlay"></div>
+
+    <div class="l-app">
+      <div class="l-container l-mainContent" id="mainContent">
+        <!-- ライブ情報 -->
+        <div class="p-liveInfoHeader">
+          <div class="p-liveSelector">
+            <div class="p-customDropdown" id="customDropdown">
+              <div class="p-dropdownSelected" data-action="toggle-dropdown">
+                <div class="p-liveTitle">小猿ライブ！</div>
+                <div class="p-liveDatetime">2024年3月15日 19:00</div>
+                <span class="material-icons p-dropdownArrow">expand_more</span>
+              </div>
+              <div class="p-dropdownOptions" id="dropdownOptions">
+                <div class="p-dropdownOption" data-action="select-live" data-param="sample">
+                  <div class="p-liveTitle">小猿ライブ！</div>
+                  <div class="p-liveDatetime">2024年3月15日 19:00</div>
+                </div>
+                <div class="p-dropdownOption" data-action="select-live" data-param="past1">
+                  <div class="p-liveTitle">肉食ライブ！</div>
+                  <div class="p-liveDatetime">2024年3月10日 18:00</div>
+                </div>
+                <div class="p-dropdownOption" data-action="select-live" data-param="past2">
+                  <div class="p-liveTitle">疾風迅雷舞！</div>
+                  <div class="p-liveDatetime">2024年3月05日 19:30</div>
+                </div>
+                <div class="p-dropdownOption" data-action="select-live" data-param="past3">
+                  <div class="p-liveTitle">大首領大猿ライブ！</div>
+                  <div class="p-liveDatetime">2024年2月28日 20:00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- 統計概要 -->
+        <div class="c-statsOverview" id="statsOverview">
+          <div class="c-statCard">
+            <div class="c-statNumber" id="totalResponses">23</div>
+            <div class="c-statLabel">総回答数</div>
+          </div>
+          <div class="c-statCard">
+            <div class="c-statNumber" id="totalPerformers">5</div>
+            <div class="c-statLabel">出演組数</div>
+          </div>
+          <div class="c-statCard">
+            <div class="c-statNumber" id="averageRating">4.2</div>
+            <div class="c-statLabel">平均評価</div>
+          </div>
+        </div>
+
+        <!-- 結果一覧 -->
+        <div class="p-resultsList" id="resultsList">
+          <div class="p-resultCard">
+            <div class="p-resultHeader">
+              <h3>ドドん</h3>
+            </div>
+            <div class="p-resultContent">
+              <div>
+                <p>回答数: 12件</p>
+                <div class="p-ratingBreakdown">
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">8</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">3</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">1</span>
+                  </span></span>
+                </div>
+              </div>
+              <div class="p-resultFooter">
+                <div class="p-rating"><span class="material-icons">star</span> 4.5</div>
+                <div class="c-commentSection" data-action="show-comments" data-param="1">
+                  <span class="c-commentIcon">
+                    <span class="material-icons">chat_bubble</span>
+                  </span>
+                  <span class="c-commentLabel">12 comment</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-resultCard">
+            <div class="p-resultHeader">
+              <h3>ダンシングヒーロー</h3>
+            </div>
+            <div class="p-resultContent">
+              <div>
+                <p>回答数: 11件</p>
+                <div class="p-ratingBreakdown">
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">5</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">4</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">2</span>
+                  </span></span>
+                </div>
+              </div>
+              <div class="p-resultFooter">
+                <div class="p-rating"><span class="material-icons">star</span> 3.8</div>
+                <div class="c-commentSection" data-action="show-comments" data-param="2">
+                  <span class="c-commentIcon">
+                    <span class="material-icons">chat_bubble</span>
+                  </span>
+                  <span class="c-commentLabel">11 comment</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- データエクスポート -->
+        <div class="p-exportSection">
+          <h3>データエクスポート</h3>
+          <div class="p-exportButtons">
+            <button class="c-btnSkyblue u-halfWidth" data-action="export-csv">CSV形式</button>
+            <button class="c-btnSecondaryPurple u-halfWidth" data-action="export-pdf">PDF形式</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Button -->
+    <a th:href="@{/create-live}" class="c-fab">
+      <span class="material-icons">add</span>
+    </a>
+
+    <script type="module" th:src="@{/build/js/index.js}"></script>
+    <script type="module" th:src="@{/build/js/navigation.js}"></script>
+    <script>
+      // FABメニューは不要になりました
+
+      // ライブデータ
+      const liveData = {
+        sample: {
+          title: "小猿ライブ！",
+          date: "2024年3月15日 19:00",
+          stats: { responses: 67, performers: 8, rating: 4.3 },
+          results: [
+            { name: "ドドん", responses: 12, rating: 4.5, comments: 12 },
+            { name: "ダンシングヒーロー", responses: 11, rating: 3.8, comments: 11 },
+            { name: "笑太郎", responses: 9, rating: 4.2, comments: 9 },
+            { name: "コメディ王", responses: 8, rating: 4.6, comments: 8 },
+            { name: "お笑い兄弟", responses: 10, rating: 4.1, comments: 10 },
+            { name: "ギャグマスター", responses: 7, rating: 4.4, comments: 7 },
+            { name: "バラエティーズ", responses: 6, rating: 4.0, comments: 6 },
+            { name: "ネタ職人", responses: 4, rating: 4.7, comments: 4 }
+          ]
+        },
+        past1: {
+          title: "肉食ライブ！",
+          date: "2024年3月10日 18:00",
+          stats: { responses: 45, performers: 3, rating: 4.5 },
+          results: [
+            { name: "肉食系男子", responses: 15, rating: 4.7, comments: 15 },
+            { name: "ステーキ師匠", responses: 15, rating: 4.3, comments: 15 },
+            { name: "焼肉兄弟", responses: 15, rating: 4.5, comments: 15 }
+          ]
+        },
+        past2: {
+          title: "疾風迅雷舞！",
+          date: "2024年3月05日 19:30",
+          stats: { responses: 38, performers: 4, rating: 4.1 },
+          results: [
+            { name: "疾風", responses: 10, rating: 4.2, comments: 10 },
+            { name: "迅雷", responses: 9, rating: 4.0, comments: 9 },
+            { name: "舞踊団", responses: 10, rating: 4.1, comments: 10 },
+            { name: "スピード王", responses: 9, rating: 4.1, comments: 9 }
+          ]
+        },
+        past3: {
+          title: "大首領大猿ライブ！",
+          date: "2024年2月28日 20:00",
+          stats: { responses: 67, performers: 6, rating: 4.3 },
+          results: [
+            { name: "大首領", responses: 12, rating: 4.6, comments: 12 },
+            { name: "大猿", responses: 11, rating: 4.2, comments: 11 },
+            { name: "猿まわし", responses: 11, rating: 4.1, comments: 11 },
+            { name: "バナナ団", responses: 11, rating: 4.3, comments: 11 },
+            { name: "ゴリラーズ", responses: 11, rating: 4.4, comments: 11 },
+            { name: "モンキービジネス", responses: 11, rating: 4.2, comments: 11 }
+          ]
+        }
+      };
+
+      function toggleDropdown() {
+        const dropdown = document.getElementById('customDropdown');
+        dropdown.classList.toggle('open');
+      }
+
+      function selectLive(value) {
+        const data = liveData[value];
+
+        // 選択されたオプションを表示
+        const selected = document.querySelector('.p-dropdownSelected');
+        selected.querySelector('.p-liveTitle').textContent = data.title;
+        selected.querySelector('.p-liveDatetime').textContent = data.date;
+
+        // ドロップダウンを閉じる
+        document.getElementById('customDropdown').classList.remove('open');
+
+        // モーダルやメニューを閉じる
+        closeAllOverlays();
+
+        changeLive(value);
+      }
+
+      function closeAllOverlays() {
+        // ハンバーガーメニューを閉じる
+        const sideNav = document.getElementById('sideNav');
+        const navOverlay = document.getElementById('navOverlay');
+        if (sideNav) sideNav.classList.remove('open');
+        if (navOverlay) navOverlay.classList.remove('open');
+
+        // FABメニューを閉じる
+        const fabMenu = document.getElementById('fabMenu');
+        if (fabMenu) fabMenu.classList.remove('open');
+
+        // その他のモーダルがあれば閉じる
+        const modals = document.querySelectorAll('.c-modal');
+        modals.forEach(modal => {
+          modal.style.display = 'none';
+        });
+      }
+
+      function changeLive(selectedLive) {
+        const data = liveData[selectedLive];
+
+
+        // 統計情報更新
+        document.getElementById('totalResponses').textContent = data.stats.responses;
+        document.getElementById('totalPerformers').textContent = data.stats.performers;
+        document.getElementById('averageRating').textContent = data.stats.rating;
+
+        // 結果一覧更新
+        const resultsList = document.getElementById('resultsList');
+        resultsList.innerHTML = '';
+
+        data.results.forEach(result => {
+          const resultCard = document.createElement('div');
+          resultCard.className = 'p-resultCard';
+          resultCard.innerHTML = `
+            <div class="p-resultHeader">
+              <h3>${result.name}</h3>
+            </div>
+            <div class="p-resultContent">
+              <div>
+                <p>回答数: ${result.responses}件</p>
+                <div class="p-ratingBreakdown">
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">${Math.floor(result.responses * 0.6)}</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">${Math.floor(result.responses * 0.3)}</span>
+                  </span></span>
+                  <span><span class="stars">
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="material-icons">star</span>
+                    <span class="count">${Math.floor(result.responses * 0.1)}</span>
+                  </span></span>
+                </div>
+              </div>
+              <div class="p-resultFooter">
+                <div class="p-rating"><span class="material-icons">star</span> ${result.rating}</div>
+                <div class="c-commentSection" data-action="show-comments" th:attr="data-param=${result.name}">
+                  <span class="c-commentIcon">
+                    <span class="material-icons">chat_bubble</span>
+                  </span>
+                  <span class="c-commentLabel">${result.comments} comment</span>
+                </div>
+              </div>
+            </div>
+          `;
+          resultsList.appendChild(resultCard);
+        });
+      }
+    </script>
+  </body>
+</html>

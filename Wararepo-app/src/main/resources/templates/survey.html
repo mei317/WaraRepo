@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>アンケート - ｗｗｗレポ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/build/css/style.css}">
+  </head>
+  <body>
+    <!-- App Header -->
+    <header class="l-appHeader">
+      <button class="c-backBtn" data-action="back">
+        <span class="material-icons">home</span>
+      </button>
+      <div class="l-headerActions">
+        <button class="c-menuToggle">
+          <div class="c-hamburgerLine"></div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation (PC) -->
+    <nav class="l-sideNav" id="sideNav">
+      <div class="l-sideNavHeader">
+        <div class="l-navHeaderContent">
+          <h2>ｗｗｗレポ</h2>
+          <p>お笑いライブアンケート</p>
+        </div>
+        <button class="l-navCloseBtn">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="l-sideNavMenu">
+        <a th:href="@{/}" class="l-sideNavItem">
+          <span class="material-icons">home</span>
+          ホーム
+        </a>
+        <a th:href="@{/account}" class="l-sideNavItem">
+          <span class="material-icons">account_circle</span>
+          アカウント
+        </a>
+        <a th:href="@{/live-detail}" class="l-sideNavItem">
+          <span class="material-icons">people</span>
+          出演者管理
+        </a>
+        <a th:href="@{/results}" class="l-sideNavItem">
+          <span class="material-icons">analytics</span>
+          集計結果
+        </a>
+        <a th:href="@{/settings}" class="l-sideNavItem">
+          <span class="material-icons">settings</span>
+          設定
+        </a>
+        <a href="#" class="l-sideNavItem" data-action="handle-logout">
+          <span class="material-icons">logout</span>
+          ログアウト
+        </a>
+      </div>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="l-navOverlay" id="navOverlay"></div>
+
+    <div class="l-app">
+      <div class="l-container l-mainContent" id="mainContent">
+        <div class="l-logoHeader">
+          <h1>ｗｗｗレポ</h1>
+          <p>お笑いライブアンケート</p>
+        </div>
+
+        <div class="l-header">
+          <h1 id="surveyTitle">サンプルライブアンケート</h1>
+        </div>
+
+        <div class="c-liveInfoCard">
+          <h2 id="surveyLiveName">サンプルライブ</h2>
+          <p>📅 2024年3月15日 19:00開演</p>
+          <p>ご参加ありがとうございます！各芸人さんの評価とコメントをお聞かせください。</p>
+        </div>
+
+        <div class="p-currentPerformerInfo" id="currentPerformerInfo">
+          <div class="p-performerBadge">現在評価中</div>
+          <h3>サンプル芸人A</h3>
+          <p>コント・漫才</p>
+        </div>
+
+        <div id="surveyForm">
+          <div>
+            <h3>この芸人さんの評価をお聞かせください</h3>
+            <div class="p-starRating" id="starRating">
+              <button class="p-star" data-rating="1">⭐</button>
+              <button class="p-star" data-rating="2">⭐</button>
+              <button class="p-star" data-rating="3">⭐</button>
+              <button class="p-star" data-rating="4">⭐</button>
+              <button class="p-star" data-rating="5">⭐</button>
+            </div>
+            <p class="p-ratingText" id="ratingText">評価を選択してください</p>
+          </div>
+
+          <div class="c-commentSection">
+            <h3>コメント（任意）</h3>
+            <textarea id="comment" placeholder="面白かった点、印象に残ったネタなど、自由にコメントをお聞かせください。"></textarea>
+            <div class="c-charCount"><span id="charCount">0</span>/200文字</div>
+          </div>
+
+          <button class="c-btnPrimary u-fullWidth" data-action="submit-rating" id="submitBtn" disabled>評価を送信</button>
+        </div>
+
+        <!-- 送信完了表示 -->
+        <div class="p-surveySuccess" id="surveySuccess" style="display: none">
+          <div class="p-successIcon">
+            <span class="material-icons">check_circle</span>
+          </div>
+          <h3>評価を送信しました！</h3>
+          <p>ご協力ありがとうございました。</p>
+          <div class="p-nextInfo">
+            <p>次の芸人さんの評価をお待ちください...</p>
+            <button class="c-btnSecondaryPurple" data-action="check-next-performer">更新して確認</button>
+          </div>
+        </div>
+
+        <!-- 全て完了表示 -->
+        <div class="p-surveyComplete" id="surveyComplete" style="display: none">
+          <div class="p-completeIcon">🎉</div>
+          <h3>すべての評価が完了しました！</h3>
+          <p>本日はお笑いライブにご参加いただき、ありがとうございました。</p>
+          <p>皆様の評価が芸人さんの今後の活動に役立てられます。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 評価済み表示 -->
+    <div class="p-alreadyRated" id="alreadyRated" style="display: none">
+      <div class="p-infoIcon">
+        <span class="material-icons">info</span>
+      </div>
+      <h3>この芸人さんは既に評価済みです</h3>
+      <p>ご協力ありがとうございました。</p>
+      <button class="c-btnSecondaryPurple" data-action="check-next-performer">次の芸人さんをチェック</button>
+    </div>
+
+    <!-- Floating Menu -->
+    <div class="c-fabMenu" id="fabMenu">
+      <div class="c-fabBackdrop" data-action="toggle-fab-menu"></div>
+      <div class="c-fabOptions">
+        <a th:href="@{/create-survey}" class="c-fabOption">
+          <span class="material-icons">quiz</span>
+          <span class="c-fabLabel">アンケート作成</span>
+        </a>
+        <a th:href="@{/create-live}" class="c-fabOption">
+          <span class="material-icons">event</span>
+          <span class="c-fabLabel">ライブ作成</span>
+        </a>
+      </div>
+      <button class="c-fab" data-action="toggle-fab-menu">
+        <span class="material-icons">add</span>
+      </button>
+    </div>
+
+    <script type="module" th:src="@{/build/js/survey-script.js}"></script>
+    <script type="module" th:src="@{/build/js/navigation.js}"></script>
+    <script>
+      // Header scroll functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        let lastScrollTop = 0;
+        let isScrolling = false;
+        const header = document.querySelector(".logo-header");
+        const scrollThreshold = 5; // Minimum scroll distance to trigger
+
+        if (!header) {
+          console.error("Header element not found");
+          return;
+        }
+
+        function handleScroll() {
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          let scrollDifference = Math.abs(scrollTop - lastScrollTop);
+
+          // Only react if scroll difference is significant enough
+          if (scrollDifference < scrollThreshold) {
+            return;
+          }
+
+          if (scrollTop > 100) {
+            if (scrollTop < lastScrollTop - scrollThreshold) {
+              // Scrolling up significantly - show header
+              header.classList.add("show");
+            } else if (scrollTop > lastScrollTop + scrollThreshold) {
+              // Scrolling down significantly - hide header
+              header.classList.remove("show");
+            }
+          } else {
+            // At top of page - hide header
+            header.classList.remove("show");
+          }
+
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+
+        function throttle(func, wait) {
+          let timeout;
+          return function executedFunction(...args) {
+            const later = () => {
+              clearTimeout(timeout);
+              func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+          };
+        }
+
+        window.addEventListener("scroll", throttle(handleScroll, 100), { passive: true });
+      });
+
+      function toggleFabMenu() {
+        const fabMenu = document.getElementById('fabMenu');
+        fabMenu.classList.toggle('open');
+      }
+    </script>
+  </body>
+</html>

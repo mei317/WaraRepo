@@ -1,0 +1,265 @@
+@use "../..//foundation/index" as *;
+
+// =================== LIVE CARDS ===================
+.p-createLiveSection {
+  margin-bottom: $spacing-xl;
+}
+
+.p-livesSection {
+  h2 {
+    font-size: 0.85rem;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.p-livesList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.p-liveHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+
+  h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+.p-liveStatus {
+  padding: 0.25rem 0.75rem;
+  border-radius: $border-radius-xl;
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+
+  &.active {
+    background: #7ee7d6;
+    color: $color-dark;
+  }
+
+  &.completed {
+    background: $color-dark;
+    color: #fff;
+  }
+
+  &.waiting {
+    background: $color-warning;
+    color: $color-dark;
+  }
+}
+
+.p-liveInfo {
+  margin-bottom: $spacing-md;
+
+  p {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.p-liveActions {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+// =================== QR CODE SECTION ===================
+.p-qrSection {
+  text-align: center;
+  margin: $spacing-lg 0;
+}
+
+.p-qrCode {
+  width: 120px;
+  height: 120px;
+  background: $color-background-border;
+  border: $border-width dashed $color-border-light;
+  border-radius: $border-radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: $spacing-md auto;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+}
+
+// =================== LIVE INFO HEADER ===================
+.p-liveInfoHeader {
+  margin-bottom: 32px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 8px;
+    color: $color-text-secondary;
+  }
+}
+
+.p-liveDate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: $color-text-muted;
+  font-size: 0.9rem;
+
+  .material-icons {
+    font-size: 18px;
+  }
+}
+
+// =================== LIVE SELECTOR ===================
+.p-liveSelector {
+  margin-bottom: 12px;
+
+  select {
+    background: $color-background;
+    border: $border-width solid $color-border;
+    border-radius: $border-radius-sm;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    font-family: "Kosugi Maru", sans-serif;
+    color: $color-text-secondary;
+    min-width: 200px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: $color-skyblue-hover;
+    }
+  }
+}
+
+.p-customDropdown {
+  position: relative;
+  min-width: 250px;
+
+  &.open {
+    .p-dropdownArrow {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .p-dropdownOptions {
+      display: block;
+    }
+  }
+}
+
+.p-dropdownSelected {
+  background: $color-secondary;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-sm;
+  padding: 12px 16px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .p-liveTitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $color-text-secondary;
+    margin-bottom: 4px;
+  }
+
+  .p-liveDatetime {
+    font-size: 0.9rem;
+    color: $color-text-muted;
+  }
+}
+
+.p-dropdownArrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.p-dropdownOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: $color-secondary;
+  border: $border-width solid $color-border;
+  border-top: none;
+  border-radius: 0 0 $border-radius-sm $border-radius-sm;
+  z-index: 1000;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.p-dropdownOption {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid $color-background-border;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: $color-background-light;
+  }
+
+  .p-liveTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    color: $color-text-secondary;
+    margin-bottom: 2px;
+  }
+
+  .p-liveDatetime {
+    font-size: 0.85rem;
+    color: $color-text-muted;
+  }
+}
+
+// =================== CONTROL SECTION ===================
+.p-controlSection {
+  background: $color-background-light;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+}
+
+.p-controlButtons {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-md;
+
+  .c-btnSecondary,
+  .c-btnPrimary,
+  .c-btnSkyblue {
+    flex: 1;
+  }
+}
+
+.p-nextInfo {
+  background: $color-background-light;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+// =================== RESPONSIVE ===================
+@media (min-width: 768px) {
+  .p-controlButtons {
+    justify-content: center;
+
+    .c-btnSecondary,
+    .c-btnPrimary {
+      flex: 0 0 auto;
+      min-width: 140px;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@use "../..//foundation/index" as *;
+
+// =================== RESULT CARDS ===================
+.p-resultsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  border-bottom: $color-border $border-width solid;
+  padding: 0.7rem $spacing-lg;
+  background: #fff9eb;
+  border-radius: $border-radius-xl $border-radius-xl 0 0;
+}
+
+.p-rating {
+  font-weight: 600;
+  color: $color-dark;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .material-icons {
+    color: $color-gold;
+    font-size: 20px;
+  }
+}
+
+.p-ratingBreakdown {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-sm;
+
+  span {
+    padding: 0.15rem $spacing-sm;
+    border-radius: 6px;
+    font-size: 0.75rem;
+  }
+
+  .stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+
+    .material-icons {
+      color: $color-gold;
+      font-size: 14px;
+    }
+  }
+
+  .count {
+    color: $color-dark;
+    margin-left: 6px;
+    font-size: 0.9rem;
+  }
+}
+
+.p-exportSection {
+  background: $color-background-light;
+  border-radius: $border-radius-md;
+  padding: $spacing-lg;
+}
+
+.p-exportButtons {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-md;
+
+  .c-btnSecondary {
+    flex: 1;
+  }
+}
+
+// =================== RESPONSIVE ===================
+@media (min-width: 768px) {
+  .p-exportButtons {
+    justify-content: center;
+
+    .c-btnSecondary {
+      flex: 0 0 auto;
+      min-width: 120px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .p-resultsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

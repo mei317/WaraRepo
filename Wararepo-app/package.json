@@ -1,0 +1,17 @@
+{
+  "name": "wararepo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:scss": "npx sass src/main/resources/static/src/scss/style.scss src/main/resources/static/build/css/style.css --no-source-map",
+    "build:ts": "tsc -p tsconfig.json",
+    "serve": "npm run build:scss && npm run build:ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.70.0",
+    "typescript": "^5.2.2"
+  }
+}
